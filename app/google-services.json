@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "133222591333",
+    "project_id": "fasthire-ae6c0",
+    "storage_bucket": "fasthire-ae6c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133222591333:android:573f2dfd8e4f9d4ffe8f8c",
+        "android_client_info": {
+          "package_name": "com.example.fasthire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133222591333-f9cbd2k08rjsamf7efpc20mgs63r9uir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArEpRvp1QYr0PnwaE08YV6uYvXrkbaY5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133222591333-f9cbd2k08rjsamf7efpc20mgs63r9uir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
