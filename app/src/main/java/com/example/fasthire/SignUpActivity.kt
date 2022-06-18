@@ -2,7 +2,6 @@ package com.example.fasthire
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -12,7 +11,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -47,7 +45,7 @@ class SignUpActivity : AppCompatActivity() {
         var passwordInput = findViewById<EditText>(R.id.passwordInput)
         var passwordVerifyInput = findViewById<EditText>(R.id.passwordVerifyInput)
         var progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        progressBar.setVisibility(View.INVISIBLE)
+        progressBar.visibility = View.INVISIBLE
 
         fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
         fun isPasswordConfirmValid(text: String) = text.toString() == passwordInput.text.toString()
@@ -76,7 +74,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
         signInButton.setOnClickListener {
-            startActivity( Intent(this, MainActivity::class.java))
+            startActivity( Intent(this, SignInActivity::class.java))
             finish()
         }
 
@@ -103,7 +101,7 @@ class SignUpActivity : AppCompatActivity() {
         signUpButton.setOnClickListener {
             if(isFormValid()){
 
-                progressBar.setVisibility(View.VISIBLE)
+                progressBar.visibility = View.VISIBLE
 
 
                 firebaseAuth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener{
@@ -133,7 +131,7 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(this, it.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
 
                     }
-                    progressBar.setVisibility(View.GONE)
+                    progressBar.visibility = View.GONE
 
                 }
 
