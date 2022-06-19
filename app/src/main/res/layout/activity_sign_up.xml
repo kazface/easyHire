@@ -28,22 +28,23 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/logo" />
+
     <ScrollView
         android:id="@+id/nsScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/easyHireLogo"
         android:layout_centerHorizontal="true"
-        android:gravity="bottom"
-        >
-        <LinearLayout
-            android:layout_gravity="top|center_horizontal"
+        android:gravity="bottom">
 
+        <LinearLayout
             android:id="@+id/inputs"
-            android:layout_marginTop="30dp"
+
             android:layout_width="300dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -51,127 +52,132 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"
 
-                app:helperText="*Required"
-                app:startIconDrawable="@drawable/ic_baseline_person_24"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:helperText="*Required"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
 
                 >
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailInput"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:hint="Full name"
                 app:helperText="*Required"
-                app:helperTextEnabled="true"
 
-                android:layout_marginTop="15dp"
-                app:startIconDrawable="@drawable/ic_baseline_edit_24"
-                >
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_edit_24">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fullNameInput"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+
+                android:hint="Phone"
                 app:helperText="*Required"
                 app:helperTextEnabled="true"
-
-                android:layout_height="wrap_content"
-                android:hint="Phone"
-                android:layout_marginTop="15dp"
-                app:startIconDrawable="@drawable/ic_baseline_phone_24"
                 app:prefixText="+60"
-                >
+                app:startIconDrawable="@drawable/ic_baseline_phone_24">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneInput"
-                    android:maxLength="9"
-                    android:inputType="phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                app:helperText="*Required"
-                app:helperTextEnabled="true"
-
-                android:layout_height="wrap_content"
-                app:endIconMode="password_toggle"
-                android:layout_marginTop="15dp"
-                android:hint="Password"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordInput"
-                    android:inputType="textPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                app:helperText="*Required"
-
-                android:layout_height="wrap_content"
-                app:endIconMode="password_toggle"
-                android:layout_marginTop="15dp"
-                android:hint="Confirm password"
-                app:helperTextEnabled="true"
-                app:startIconDrawable="@drawable/ic_baseline_lock_24"
-                app:errorIconDrawable="@null"
-                app:errorEnabled="true"
-
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordVerifyInput"
-                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLength="9" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+
+                android:hint="Password"
+                app:endIconMode="password_toggle"
+                app:helperText="*Required"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="15dp"
+                android:hint="Confirm password"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@null"
+                app:helperText="*Required"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordVerifyInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="15dp"
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/isEmployerSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I am employer"
+                android:layout_marginTop="15dp"
 
-
-
+                />
 
             <Button
                 android:id="@+id/signUpButton"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_primary_button"
                 android:gravity="center"
-                android:text="Sign Up"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                />
+                android:text="Sign Up" />
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signInButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="15dp"
                 android:backgroundTint="@color/white"
@@ -179,7 +185,6 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:layout_gravity="center"
                 android:text="Sign In"
                 android:textColor="#1A73E9" />
 

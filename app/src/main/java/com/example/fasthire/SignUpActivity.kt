@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -41,6 +39,7 @@ class SignUpActivity : AppCompatActivity() {
 
         var fullNameInput = findViewById<EditText>(R.id.fullNameInput)
         var phoneInput = findViewById<EditText>(R.id.phoneInput)
+        var isEmployerSwitch = findViewById<SwitchCompat>(R.id.isEmployerSwitch)
 
         var passwordInput = findViewById<EditText>(R.id.passwordInput)
         var passwordVerifyInput = findViewById<EditText>(R.id.passwordVerifyInput)
@@ -111,6 +110,7 @@ class SignUpActivity : AppCompatActivity() {
                             emailInput.text.toString(),
                             "+60 ${phoneInput.text.toString()}",
                             fullNameInput.text.toString(),
+                            isEmployerSwitch.isChecked
                         )
                             database
                                 .getReference("Users")
