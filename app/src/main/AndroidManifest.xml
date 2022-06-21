@@ -10,10 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FastHire">
         <activity
+            android:name=".ApplicantActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SignInActivity"
             android:exported="true">

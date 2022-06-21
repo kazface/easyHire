@@ -51,8 +51,10 @@ class SignInActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener{
                     if(it.isSuccessful){
                         val user = firebaseAuth.currentUser
-
                         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, ApplicantActivity::class.java))
+                        finish()
+
                     }else{
                         Toast.makeText(this, it.exception?.localizedMessage ?: "Error!", Toast.LENGTH_SHORT).show()
 
