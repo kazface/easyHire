@@ -13,12 +13,12 @@ class User() {
         this.isEmployer = isEmployer
     }
 
+    var id: String = "";
+     var isEmployer: Boolean = false;
+     var email: String = ""
+     var phone: String = ""
 
-    final var isEmployer: Boolean = false;
-    final var email: String = ""
-    final var phone: String = ""
-
-    final var fullName: String = ""
+     var fullName: String = ""
 
     private var password: String = ""
 

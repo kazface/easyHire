@@ -12,6 +12,8 @@ class ApplicantActivity : AppCompatActivity() {
         setContentView(R.layout.activity_applicant)
 
         addFragment(ApplicantHomePageFragment.newInstance());
+
+
         var bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottomNav)
         bottomNavigation.show(0);
         bottomNavigation.add(MeowBottomNavigation.Model(0, R.drawable.ic_round_home_24))
@@ -22,6 +24,10 @@ class ApplicantActivity : AppCompatActivity() {
             when(it.id){
                 0 -> {
                     replaceFragment(ApplicantHomePageFragment.newInstance());
+                }
+                1 ->{
+                    replaceFragment(findJobFragment.newInstance());
+
                 }
             }
         }
