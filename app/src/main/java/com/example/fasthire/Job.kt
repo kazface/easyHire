@@ -1,65 +1,39 @@
 package com.example.fasthire
 
-import android.util.Log
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import android.os.Parcel
+import android.os.Parcelable
 
-class Job {
-    constructor(){
-
+data class Job(val type: String? = "", val title: String? ="", val companyName: String?="", val location: String?="", val period: String?="", val salary: Long=0, val userId: String?="", val createdDateUnix: Long? = 0) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readLong(),
+        parcel.readString(),
+        parcel.readLong()
+    ) {
     }
 
-
-    constructor(companyName: String, location: String, period: String, salary: Long, userId: String, title: String, type: String) {
-        this.companyName = companyName
-        this.location = location
-        this.period = period
-        this.salary = salary
-        this.userId = userId
-        this.title = title
-        this.type = type
+    override fun describeContents(): Int {
+        TODO("Not yet implemented")
     }
-    var type: String =""
-    var title: String =""
-    var companyName: String =""
-    var location: String =""
-    var period: String =""
-    var salary: Long  = 0
-    var userId: String =""
 
-    companion object {
-        private lateinit var database: DatabaseReference
+    override fun writeToParcel(p0: Parcel?, p1: Int) {
+        TODO("Not yet implemented")
+    }
 
-        fun getAllJobs(): ArrayList<Job> {
-            var jobs: ArrayList<Job> = ArrayList<Job>()
-
-            database = FirebaseDatabase.getInstance().getReference("Jobs")
-            database.addValueEventListener(object : ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        Log.d("Children", snapshot.children.toString())
-                        for(jobSnapshot in snapshot.children){
-                            val job = jobSnapshot.getValue(Job::class.java)
-                            jobs.add(job!!)
-
-                        }
-                    }
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-            return jobs;
-
+    companion object CREATOR : Parcelable.Creator<Job> {
+        override fun createFromParcel(parcel: Parcel): Job {
+            return Job(parcel)
         }
 
-
-
+        override fun newArray(size: Int): Array<Job?> {
+            return arrayOfNulls(size)
+        }
     }
+
 
 }
 

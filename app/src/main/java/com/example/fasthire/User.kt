@@ -1,5 +1,9 @@
 package com.example.fasthire
 
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.core.SnapshotHolder
+import com.google.firebase.database.ktx.getValue
+
 class User() {
 
     constructor(email: String) : this() {
@@ -21,6 +25,9 @@ class User() {
      var fullName: String = ""
 
     private var password: String = ""
+
+
+
 
 
 

@@ -1,14 +1,30 @@
 package com.example.fasthire
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+
 
 class ApplicantActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_applicant)
 
         addFragment(ApplicantHomePageFragment.newInstance());
@@ -31,9 +47,14 @@ class ApplicantActivity : AppCompatActivity() {
                 }
             }
         }
+
+
+
+
     }
 
-    private fun replaceFragment(fragment: Fragment, ){
+
+    private fun replaceFragment(fragment: Fragment){
         val fragmentTransition = supportFragmentManager.beginTransaction();
         fragmentTransition.replace(R.id.fragmentContainer, fragment).addToBackStack(Fragment::class.java.simpleName).commit();
     }

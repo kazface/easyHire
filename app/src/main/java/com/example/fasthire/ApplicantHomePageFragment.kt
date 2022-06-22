@@ -38,7 +38,6 @@ class ApplicantHomePageFragment : Fragment() {
         var findJobBtn = view.findViewById<RelativeLayout>(R.id.find_job_card_background);
 
         findJobBtn.setOnClickListener{
-            Log.d("ALL_JOBS", Job.getAllJobs().toString())
         }
 
 

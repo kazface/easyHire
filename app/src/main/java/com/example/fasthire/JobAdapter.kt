@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobAdapter.ViewHolder>() {
 
-
+    var onItemClick : ((Job) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.job_card, parent, false)
         return ViewHolder(itemView)
@@ -23,6 +23,15 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
         holder.jobSalary.text = job.salary.toString()
         holder.periodJob.text = job.period
         holder.jobType.text = job.type
+
+
+        holder.applyButton.setOnClickListener{
+
+            onItemClick?.invoke(job)
+
+        }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +44,11 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
         var jobSalary = itemView.findViewById<TextView>(R.id.jobSalary);
         var periodJob = itemView.findViewById<TextView>(R.id.period);
         var jobType = itemView.findViewById<TextView>(R.id.jobType);
+        var applyButton = itemView.findViewById<TextView>(R.id.applyButton);
+        var saveCheckBox = itemView.findViewById<TextView>(R.id.saveCheckBox);
+
+
+
     }
 
 }
