@@ -9,7 +9,51 @@
     android:background="@drawable/background3"
     android:orientation="vertical">
 
+        <androidx.appcompat.widget.SearchView
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/jobSearchView"
+            app:queryHint="Search job title"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
+            android:background="@drawable/search_view_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:layout_marginStart="15dp"
+            android:id="@+id/jobTypeCheckBoxes"
+            android:layout_below="@id/jobSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/fullTimeTypeCheckBox"
+                    android:text="Full time"
+                    android:gravity="center"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"/>
+                <CheckBox
+                    android:id="@+id/partTimeTypeCheckBox"
+                    android:text="Part Time"
+                    android:gravity="center"
+
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"/>
+                <CheckBox
+                    android:id="@+id/freelanceTypeCheckBox"
+                    android:text="Freelance"
+                    android:gravity="center"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"/>
+
+
+        </LinearLayout>
+
         <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_below="@id/jobTypeCheckBoxes"
             android:id="@+id/jobCardShimmer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +74,7 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <LinearLayout
+            android:layout_below="@id/jobTypeCheckBoxes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

@@ -2,16 +2,13 @@ package com.example.fasthire
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,47 +17,30 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import java.util.*
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
-import kotlin.collections.ArrayList
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [findJobJobFragment.newInstance] factory method to
+ * Use the [savedJobFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class findJobFragment : Fragment() {
-
+class savedJobFragment : Fragment() {
+    // TODO: Rename and change types of parameters
     private lateinit var jobRecyclerView: RecyclerView;
     private lateinit var jobList: ArrayList<Job>
-    private lateinit var jobListSaved: ArrayList<Job>
     private lateinit var jobAdapter: JobAdapter
-
-
-
     private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        var partTimeCheckBox = view.findViewById<CheckBox>(R.id.partTimeTypeCheckBox)
-        var freelanceCheckBox = view.findViewById<CheckBox>(R.id.freelanceTypeCheckBox)
-        var fullTimeCheckBox = view.findViewById<CheckBox>(R.id.fullTimeTypeCheckBox)
-        partTimeCheckBox.isChecked = true
-        fullTimeCheckBox.isChecked = true
-        freelanceCheckBox.isChecked = true
-
         var jobCardShimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobCardShimmer)
         jobCardShimmer.startShimmerAnimation();
         jobCardShimmer.visibility = View.VISIBLE;
@@ -69,7 +49,7 @@ class findJobFragment : Fragment() {
         jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
         jobRecyclerView.setHasFixedSize(true)
         jobRecyclerView.visibility = View.INVISIBLE
-        jobListSaved = arrayListOf();
+
         jobList = arrayListOf();
         jobAdapter = JobAdapter(jobList)
         jobRecyclerView.adapter = jobAdapter
@@ -87,34 +67,31 @@ class findJobFragment : Fragment() {
 
                 if(snapshot.exists()){
                     for(jobSnapshot in snapshot.children){
-
                         var saved = 0
                         val job = jobSnapshot.getValue<Job>()
                         job!!.id = jobSnapshot.key.toString()
-
-                        isSavedRef!!.addValueEventListener(object : ValueEventListener{
+                        isSavedRef!!.addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(saveSnapshot: DataSnapshot) {
-                                if(saveSnapshot.hasChild((job?.id ?: -1).toString())){
-                                    saved = 1
+                                Log.d("SavedJobPage", saveSnapshot.toString())
+                                if(saveSnapshot.hasChild((job.id).toString())){
+                                    Log.d("SavedJobPage", jobList.toString())
+                                    if(!jobList.contains(job)){
+                                        saved = 1
+                                        job!!.saved = saved
+                                        jobList.add(job)
+                                        jobAdapter.notifyDataSetChanged()
+                                        jobRecyclerView.visibility = View.VISIBLE
+                                        jobCardShimmer.visibility = View.GONE
+                                    }
+
                                 }
-                                job!!.saved = saved
-                                if(!jobList.contains(job)){
-                                    jobList.add(job)
-                                    jobListSaved.add(job)
-                                    jobAdapter.notifyDataSetChanged()
-                                    jobRecyclerView.visibility = View.VISIBLE
-                                    jobCardShimmer.visibility = View.GONE
-                                }
-
-                                Log.d("JOBSS",saveSnapshot.toString())
-
-
+                                jobRecyclerView.visibility = View.VISIBLE
+                                jobCardShimmer.visibility = View.GONE
 
                             }
                             override fun onCancelled(error: DatabaseError) {
                             }
                         })
-
                         Log.d("Check", job.toString())
                     }
 
@@ -136,68 +113,23 @@ class findJobFragment : Fragment() {
             transaction?.commit()
         }
 
-        var searchView = view.findViewById<SearchView>(R.id.jobSearchView)
-
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-            override fun onQueryTextChange(p0: String?): Boolean {
-                jobList.clear()
-                var searchText = p0!!.lowercase()
-                if(searchText.isNotEmpty() && searchText != ""){
-                    jobListSaved.forEach {
-                        if (it.title.toString().lowercase()
-                                .contains(searchText) && !jobList.contains(it)
-                        ) {
-                            jobList.add(it)
-                        }
-                    }
-                    jobAdapter.notifyDataSetChanged()
-                }else{
-                    jobListSaved.forEach{
-                        if(!jobList.contains(it)){
-                            jobList.add(it)
-                        }
-                    }
-                    jobAdapter.notifyDataSetChanged()
-                }
-                return false
-            }
-
-
-        })
-
-
-        partTimeCheckBox.setOnCheckedChangeListener{ buttonView, isChecked ->
-            //toDo (Checkbox filters)
-                }
-
 
 
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_find_job, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_saved_job, container, false)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment findJobJobFragment.
-         */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-            findJobFragment().apply {
+            savedJobFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

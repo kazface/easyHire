@@ -42,8 +42,7 @@ class ApplicantActivity : AppCompatActivity() {
                     replaceFragment(ApplicantHomePageFragment.newInstance());
                 }
                 1 ->{
-                    replaceFragment(findJobFragment.newInstance());
-
+                    replaceFragment(savedJobFragment.newInstance());
                 }
             }
         }

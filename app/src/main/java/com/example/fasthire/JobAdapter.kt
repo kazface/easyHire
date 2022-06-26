@@ -1,13 +1,25 @@
 package com.example.fasthire
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobAdapter.ViewHolder>() {
+    var savedJobList: ArrayList<Job>? = null
+    init{
+        savedJobList = ArrayList(jobList)
+    }
 
     var onItemClick : ((Job) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,14 +35,31 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
         holder.jobSalary.text = job.salary.toString()
         holder.periodJob.text = job.period
         holder.jobType.text = job.type
-
-
-        holder.applyButton.setOnClickListener{
-
+        holder.jobCardView.setOnClickListener{
             onItemClick?.invoke(job)
-
         }
+        holder.saveCheckBox.isChecked = (job.saved == 1)
 
+
+        holder.saveCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            var firebaseAuth: FirebaseAuth
+            var database : FirebaseDatabase = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/")
+            firebaseAuth = FirebaseAuth.getInstance()
+            val currentUser = firebaseAuth.currentUser!!.uid
+
+            var jobsRef = database
+                .getReference("SavedJob")
+            Log.d("IsChecked", isChecked.toString())
+            if(isChecked){
+                job.id?.let {
+                    jobsRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child(it)
+                        .setValue(true).addOnCompleteListener{
+                        }
+                };
+            }else{
+                job.id?.let { jobsRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child(it).removeValue() }
+            }
+        }
 
     }
 
@@ -45,10 +74,10 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
         var periodJob = itemView.findViewById<TextView>(R.id.period);
         var jobType = itemView.findViewById<TextView>(R.id.jobType);
         var applyButton = itemView.findViewById<TextView>(R.id.applyButton);
-        var saveCheckBox = itemView.findViewById<TextView>(R.id.saveCheckBox);
-
-
-
+        var saveCheckBox = itemView.findViewById<CheckBox>(R.id.saveCheckBox);
+        var jobCardView = itemView.findViewById<MaterialCardView>(R.id.jobCardView);
+        var searchView = itemView.findViewById<SearchView>(R.id.jobSearchView);
     }
+
 
 }

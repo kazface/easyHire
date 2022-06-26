@@ -118,12 +118,10 @@ class SignUpActivity : AppCompatActivity() {
                                 .setValue(user).addOnCompleteListener{ task ->
                                     if(task.isSuccessful){
                                         Toast.makeText(this, "Account registered", Toast.LENGTH_SHORT).show()
-
                                     }else{
                                         Toast.makeText(this, task.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
                                     }
                                 };
-
 
 
 

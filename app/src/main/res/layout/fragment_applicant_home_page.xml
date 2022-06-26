@@ -8,17 +8,14 @@
     android:background="@drawable/background3"
     >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        >
+
 
         <LinearLayout
+
             android:id="@+id/helloTextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="35dp"
             android:orientation="vertical"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
@@ -150,191 +147,34 @@
                 android:textSize="25dp" />
 
 
-            <com.google.android.material.card.MaterialCardView
-                style="@style/CardView"
-                android:layout_width="match_parent"
-                android:layout_height="115dp"
-                android:layout_margin="12dp"
-                android:backgroundTint="@color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/jobPositionName"
-                        android:layout_width="166dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/dmsansbold"
-                        android:text="Product Designer"
-                        android:textColor="#150B3D" />
-
-                    <LinearLayout
-                        android:id="@+id/jobDescrrLayout"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/jobPositionName"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="0"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Google inc"
-                            android:textColor="#150B3D"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="0"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="•"
-                            android:textColor="#150B3D"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="0"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text="Kuala-Lumpur"
-                            android:textColor="#150B3D"
-                            android:textSize="10sp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/priceTextLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/jobDescrrLayout"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/jobDescrrLayout"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="0"
-                            android:fontFamily="@font/dmsansbold"
-                            android:text="23"
-                            android:textColor="#1A73E9"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/jobDescrrLayout"
-                            android:layout_marginBottom="10dp"
-                            android:layout_weight="0"
-                            android:fontFamily="@font/dmsansbold"
-                            android:text=" RM/h"
-                            android:textColor="#1A73E9"
-                            android:textSize="15sp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/priceTextLayout"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.card.MaterialCardView
-                            style="@style/CardView"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:backgroundTint="#1A73E9"
-                            app:cardCornerRadius="15dp"
-                            >
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="0"
-                                android:fontFamily="@font/dmsansbold"
-                                android:text=" Part Time"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
-
-
-                        </com.google.android.material.card.MaterialCardView>
-
-
-                    </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:fontFamily="@font/dmsansbold"
-                        android:text="Apply"
-                        android:textSize="12sp"
-                        app:cardCornerRadius="15dp" />
-
-                    <CheckBox
-                        android:id="@+id/saveCheckBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="12dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="@android:color/transparent"
-                        android:button="@drawable/book_mark_check_box"
-                        app:cardCornerRadius="15dp" />
-
-
-                </RelativeLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-
-
-
         </LinearLayout>
 
 
-    </ScrollView>
+
+    <RelativeLayout
+        android:layout_below="@id/helloTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
 
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/jobCardShimmer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/job_card_shimmer"/>
 
 
+        </com.facebook.shimmer.ShimmerFrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recentJobCardRecycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/job_card"
+            />
 
 
-
-
-
-
-
+    </RelativeLayout>
 
 
 
