@@ -11,6 +11,7 @@
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/checkbox_filter_false.xml" value="0.2045" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/checkbox_filter_true.xml" value="0.2045" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/gradient_bg.xml" value="0.142" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.232" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/ic_baseline_font_download_24.xml" value="0.1225" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/job_card.xml" value="0.2065" />
@@ -21,15 +22,18 @@
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout-v28/activity_sign_up.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout-w1240dp/xczx.xml" value="0.1" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout-w936dp/xczx.xml" value="0.1" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/CV_card.xml" value="0.33" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/activity_applicant.xml" value="0.136" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/activity_main2.xml" value="0.1" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/activity_sign_up.xml" value="0.4" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/cv_card.xml" value="0.33" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/filter_checkbox.xml" value="0.20863616930312098" />
-        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_applicant_cvs.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_applicant_cvs.xml" value="0.25" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_applicant_home_page.xml" value="0.17" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_applicant_profile.xml" value="0.25" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_cv_detailed.xml" value="0.33" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_dashboard.xml" value="0.1703125" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_find_job.xml" value="0.128" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_find_job_job.xml" value="0.4" />

@@ -118,6 +118,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/myCvButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_primary_button"
@@ -127,6 +128,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/jobResponsesButton"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

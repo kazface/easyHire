@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -64,11 +65,14 @@ class ApplicantProfileFragment : Fragment() {
         val storage = FirebaseStorage.getInstance()
 
 
+        var myCvButton = view.findViewById<AppCompatButton>(R.id.myCvButton)
+        var jobResponsesButton = view.findViewById<AppCompatButton>(R.id.jobResponsesButton)
+
+
 
         profilePhotoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/profilePhotos/${user!!.email}")
         userProfilePic = view.findViewById<ImageView>(R.id.userProfilePic)
         progressBar.visibility = View.VISIBLE
-
         userProfilePic.visibility = View.INVISIBLE
 
         GlideApp.with(requireView().context)
@@ -79,7 +83,6 @@ class ApplicantProfileFragment : Fragment() {
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .placeholder(R.drawable.profile_pic_gray)
             .listener(object : RequestListener<Drawable> {
-
                 override fun onResourceReady(
                     resource: Drawable?,
                     model: Any?,
@@ -91,7 +94,6 @@ class ApplicantProfileFragment : Fragment() {
                     userProfilePic.visibility = View.VISIBLE
                     return false;
                 }
-
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
@@ -113,9 +115,18 @@ class ApplicantProfileFragment : Fragment() {
         addImageButton.setOnClickListener{
 
             launchGallery()
-
-
         }
+
+        myCvButton.setOnClickListener{
+            val myCvFragmentTransaction = ApplicantCvsFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            val bundle = Bundle()
+            bundle.putSerializable("User", user)
+            myCvFragmentTransaction.arguments = bundle
+            transaction?.replace(R.id.fragmentContainer, myCvFragmentTransaction)
+            transaction?.commit()
+        }
+
     }
 
     private fun launchGallery() {

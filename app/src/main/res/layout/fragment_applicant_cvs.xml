@@ -7,6 +7,53 @@
    android:background="@drawable/background3"
     >
 
+    <TextView
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:id="@+id/textTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        android:text="My CVs"
+        android:fontFamily="@font/dmsansbold"
+        android:textColor="#1A73E9"
+        android:textSize="25sp" />
+
+
+    <LinearLayout
+        android:layout_below="@id/textTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cvRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/cv_card" />
+
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:tint="@color/white"
+        android:id="@+id/fabAddCV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#1A73E9"
+        android:src="@drawable/ic_baseline_add_24"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="+" />
+
+
 
 
 
