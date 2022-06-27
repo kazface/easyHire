@@ -51,12 +51,14 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
                 .getReference("SavedJob")
             Log.d("IsChecked", isChecked.toString())
             if(isChecked){
+                job.saved = 1
                 job.id?.let {
                     jobsRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child(it)
                         .setValue(true).addOnCompleteListener{
                         }
                 };
             }else{
+                job.saved = 0
                 job.id?.let { jobsRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child(it).removeValue() }
             }
         }

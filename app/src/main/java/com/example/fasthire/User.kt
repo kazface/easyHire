@@ -1,34 +1,30 @@
 package com.example.fasthire
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.core.SnapshotHolder
-import com.google.firebase.database.ktx.getValue
+import java.io.Serializable
 
-class User() {
+class User() : Serializable{
 
     constructor(email: String) : this() {
         this.email = email;
     }
 
-    constructor(email: String, phone: String, fullName: String, isEmployer: Boolean) : this() {
+    constructor(email: String, phone: String, fullName: String, employer: Boolean?) : this() {
         this.email = email;
         this.phone = phone
         this.fullName = fullName
-        this.isEmployer = isEmployer
+        this.employer = employer
     }
+     var id: String? = "";
 
-    var id: String = "";
-     var isEmployer: Boolean = false;
+     var employer: Boolean? = null;
+
      var email: String = ""
+
      var phone: String = ""
 
      var fullName: String = ""
 
-    private var password: String = ""
-
-
-
-
+    private var password: String? = ""
 
 
 }

@@ -65,5 +65,8 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.firebaseui:firebase-ui-storage:6.2.1'
 
+    implementation "androidx.room:room-runtime:2.2.4"
+    kapt "androidx.room:room-compiler:2.2.4"
+    implementation "androidx.room:room-ktx:2.2.5"
 
 }

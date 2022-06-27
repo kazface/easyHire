@@ -1,20 +1,9 @@
 package com.example.fasthire
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
-import com.facebook.shimmer.ShimmerFrameLayout
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.ktx.Firebase
 
 
 class ApplicantActivity : AppCompatActivity() {
@@ -25,9 +14,15 @@ class ApplicantActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_applicant)
+        val user: User = intent.getSerializableExtra("User") as User
 
-        addFragment(ApplicantHomePageFragment.newInstance());
+        setContentView(R.layout.activity_applicant)
+        var applicantHomePageFragment = ApplicantHomePageFragment.newInstance()
+        val bundle = Bundle()
+        bundle.putSerializable("User", user)
+        applicantHomePageFragment.arguments = bundle
+
+        addFragment(applicantHomePageFragment);
 
 
         var bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottomNav)
@@ -39,10 +34,19 @@ class ApplicantActivity : AppCompatActivity() {
         bottomNavigation.setOnClickMenuListener {
             when(it.id){
                 0 -> {
-                    replaceFragment(ApplicantHomePageFragment.newInstance());
+                    replaceFragment(applicantHomePageFragment);
                 }
                 1 ->{
                     replaceFragment(savedJobFragment.newInstance());
+                }
+                2 -> {
+
+
+                }
+                3 -> {
+                    var applicantProfileFragment = ApplicantProfileFragment.newInstance()
+                    applicantProfileFragment.arguments = bundle
+                    replaceFragment(applicantProfileFragment);
                 }
             }
         }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -46,6 +47,10 @@ class savedJobFragment : Fragment() {
         jobCardShimmer.visibility = View.VISIBLE;
 
         jobRecyclerView = view.findViewById(R.id.jobRecyclerView)
+
+        var swiperefresh = view.findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
+
+
         jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
         jobRecyclerView.setHasFixedSize(true)
         jobRecyclerView.visibility = View.INVISIBLE
@@ -61,48 +66,69 @@ class savedJobFragment : Fragment() {
                 it
             )
         }
+        fun updateRecycle(){
 
-        database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+            database.addValueEventListener(object : ValueEventListener {
 
-                if(snapshot.exists()){
-                    for(jobSnapshot in snapshot.children){
-                        var saved = 0
-                        val job = jobSnapshot.getValue<Job>()
-                        job!!.id = jobSnapshot.key.toString()
-                        isSavedRef!!.addValueEventListener(object : ValueEventListener {
-                            override fun onDataChange(saveSnapshot: DataSnapshot) {
-                                Log.d("SavedJobPage", saveSnapshot.toString())
-                                if(saveSnapshot.hasChild((job.id).toString())){
-                                    Log.d("SavedJobPage", jobList.toString())
-                                    if(!jobList.contains(job)){
-                                        saved = 1
-                                        job!!.saved = saved
-                                        jobList.add(job)
-                                        jobAdapter.notifyDataSetChanged()
-                                        jobRecyclerView.visibility = View.VISIBLE
-                                        jobCardShimmer.visibility = View.GONE
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    if(snapshot.exists()){
+                        for(jobSnapshot in snapshot.children){
+                            var saved = 0
+                            val job = jobSnapshot.getValue<Job>()
+                            job!!.id = jobSnapshot.key.toString()
+                            isSavedRef!!.addValueEventListener(object : ValueEventListener {
+                                override fun onDataChange(saveSnapshot: DataSnapshot) {
+                                    Log.d("SavedJobPage", saveSnapshot.toString())
+                                    if(saveSnapshot.hasChild((job.id).toString())){
+                                        Log.d("SavedJobPage", jobList.toString())
+                                        if(!jobList.contains(job)){
+                                            saved = 1
+                                            job!!.saved = saved
+                                            jobList.add(job)
+                                            jobAdapter.notifyDataSetChanged()
+                                            jobRecyclerView.visibility = View.VISIBLE
+                                            jobCardShimmer.visibility = View.GONE
+                                        }
+
                                     }
+                                    jobRecyclerView.visibility = View.VISIBLE
+                                    jobCardShimmer.visibility = View.GONE
 
                                 }
-                                jobRecyclerView.visibility = View.VISIBLE
-                                jobCardShimmer.visibility = View.GONE
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+                            })
+                            Log.d("Check", job.toString())
+                        }
 
-                            }
-                            override fun onCancelled(error: DatabaseError) {
-                            }
-                        })
-                        Log.d("Check", job.toString())
                     }
+                }
 
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+        }
+        updateRecycle()
+
+        fun filterData(){
+            var jobListSaved = ArrayList(jobList)
+
+//            jobList = jobList.filter{it.saved == 1} as ArrayList<Job>
+            jobList.clear()
+            jobListSaved.forEach{
+                if(it.saved == 1){
+                    jobList.add(it)
                 }
             }
+            jobAdapter.notifyDataSetChanged()
+        }
 
-            override fun onCancelled(error: DatabaseError) {
-            }
-
-        })
-
+        swiperefresh.setOnRefreshListener{
+            filterData()
+            swiperefresh.isRefreshing = false
+        }
         jobAdapter.onItemClick = {
             val jobDetailedFragment = jobDetailedFragment()
             val bundle = Bundle()

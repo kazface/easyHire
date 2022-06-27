@@ -39,7 +39,6 @@
                     android:id="@+id/partTimeTypeCheckBox"
                     android:text="Part Time"
                     android:gravity="center"
-
                     android:layout_width="100dp"
                     android:layout_height="50dp"/>
                 <CheckBox
@@ -48,9 +47,8 @@
                     android:gravity="center"
                     android:layout_width="100dp"
                     android:layout_height="50dp"/>
-
-
         </LinearLayout>
+
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_below="@id/jobTypeCheckBoxes"

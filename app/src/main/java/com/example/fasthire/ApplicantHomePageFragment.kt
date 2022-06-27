@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,11 +36,12 @@ class ApplicantHomePageFragment : Fragment() {
     private lateinit var jobList: ArrayList<Job>
     private lateinit var jobAdapter: JobAdapter
     private lateinit var database: DatabaseReference
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
+            user = it.getSerializable("User") as User
         }
     }
 
@@ -48,9 +50,12 @@ class ApplicantHomePageFragment : Fragment() {
         var jobCardShimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobCardShimmer)
         jobCardShimmer.startShimmerAnimation();
         jobCardShimmer.visibility = View.VISIBLE;
+        Log.d("InsideHomePage", user.fullName)
+        var userFullNameText = view.findViewById<TextView>(R.id.userFullNameText)
+        userFullNameText.text = user.fullName
 
         jobRecyclerView = view.findViewById(R.id.recentJobCardRecycle)
-        jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
+        jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL ,false)
         jobRecyclerView.setHasFixedSize(true)
         jobRecyclerView.visibility = View.INVISIBLE
 
@@ -73,7 +78,8 @@ class ApplicantHomePageFragment : Fragment() {
                         val job = jobSnapshot.getValue<Job>()
                         isSavedRef!!.addValueEventListener(object : ValueEventListener{
                             override fun onDataChange(saveSnapshot: DataSnapshot) {
-                                if(saveSnapshot.hasChild((job?.id ?: -1).toString())){
+                                job!!.id = jobSnapshot.key.toString()
+                                if(saveSnapshot.hasChild((job.id ?: 1231242).toString())){
                                     saved = 1
                                 }
                                 job!!.saved = saved

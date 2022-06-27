@@ -46,7 +46,6 @@ class jobDetailedFragment : Fragment() {
         var jobLocation = view.findViewById<TextView>(R.id.jobLocation)
         var vaccinationInfoLayout = view.findViewById<LinearLayout>(R.id.vaccinationInfoLayout)
         var skillsNeededText = view.findViewById<TextView>(R.id.skillsNeededText)
-
         Log.d("JOB", job.toString())
 
         fun Int.toBoolean() = this == 1

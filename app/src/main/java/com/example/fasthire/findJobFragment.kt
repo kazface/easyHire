@@ -172,9 +172,6 @@ class findJobFragment : Fragment() {
         partTimeCheckBox.setOnCheckedChangeListener{ buttonView, isChecked ->
             //toDo (Checkbox filters)
                 }
-
-
-
     }
 
     override fun onCreateView(
@@ -184,6 +181,11 @@ class findJobFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_find_job, container, false)
     }
+
+
+
+
+
 
     companion object {
         /**
