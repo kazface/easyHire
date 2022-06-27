@@ -10,9 +10,9 @@
         <LinearLayout
             android:layout_alignParentTop="true"
             android:id="@+id/headerJobDetailedLayout"
-            android:paddingTop="50dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -112,99 +112,106 @@
         </LinearLayout>
 
 
-        <ScrollView
-            android:layout_below="@id/headerJobDetailedLayout"
-            android:fillViewport="true"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerJobDetailedLayout"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/jobDescrrCard"
+                style="@style/CardView"
+                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
 
-                <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/jobDescrrCard"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    style="@style/CardView"
-                    android:layout_marginTop="15dp"
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp">
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="25dp"
-                            android:fontFamily="@font/dmsansbold"
-                            android:text="Job description"
-                            android:textColor="#150B3D" />
+                        android:fontFamily="@font/dmsansbold"
+                        android:text="Job description"
+                        android:textColor="#150B3D"
+                        android:textSize="25dp" />
 
-                        <TextView
-                            android:id="@+id/jobDescrText"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20dp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text='
+                    <TextView
+                        android:id="@+id/jobDescrText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/dmsansregular"
+                        android:text='
         We are a group of multinational web developers who are fascinated by next-generation web technologies. We genuinely care about bringing an enjoyable web experience to our next billion users. We value fundamentals more than the ever-changing wind in the front end landscape.\n\n
         We believe in "HTML for the content, CSS for the presentation, JavaScript for the interaction". We cut following the grain, not against it.
         '
-                            android:textColor="#150B3D" />
+                        android:textColor="#150B3D"
+                        android:textSize="20dp" />
 
-                    </LinearLayout>
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
 
-                <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    style="@style/CardView"
-                    android:layout_marginTop="15dp"
+            <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@style/CardView"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="6dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="25dp"
-                            android:fontFamily="@font/dmsansbold"
-                            android:text="Skills needed"
-                            android:textColor="#150B3D" />
+                        android:fontFamily="@font/dmsansbold"
+                        android:text="Skills needed"
+                        android:textColor="#150B3D"
+                        android:textSize="25dp" />
 
-                        <TextView
-                            android:id="@+id/skillsNeededText"
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20dp"
-                            android:fontFamily="@font/dmsansregular"
-                            android:text='•Data Science\n•Data Science\n•Data Science\n•Data Science'
-                            android:textColor="#150B3D" />
+                    <TextView
+                        android:id="@+id/skillsNeededText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/dmsansregular"
+                        android:text='•Data Science\n•Data Science\n•Data Science\n•Data Science'
+                        android:textColor="#150B3D"
+                        android:textSize="20dp" />
 
 
+                </LinearLayout>
 
-                    </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                </com.google.android.material.card.MaterialCardView>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                />
         </LinearLayout>
     </ScrollView>
 
