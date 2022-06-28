@@ -107,14 +107,14 @@ class ApplicantHomePageFragment : Fragment() {
             bundle.putParcelable("Job", it)
             jobDetailedFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)
+            transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)
             transaction?.commit()
         }
 
         var findJobBtn = view.findViewById<RelativeLayout>(R.id.find_job_card_background);
         findJobBtn.setOnClickListener{
             val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.fragmentContainer, findJobFragment())
+            transaction?.replace(R.id.fragmentContainer, findJobFragment())?.addToBackStack(null)
             transaction?.commit()
         }
     }

@@ -135,7 +135,7 @@ class savedJobFragment : Fragment() {
             bundle.putParcelable("Job", it)
             jobDetailedFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
-            transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)
+            transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)
             transaction?.commit()
         }
 

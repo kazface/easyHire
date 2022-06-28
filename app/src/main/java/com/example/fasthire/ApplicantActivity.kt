@@ -17,38 +17,46 @@ class ApplicantActivity : AppCompatActivity() {
         val user: User = intent.getSerializableExtra("User") as User
 
         setContentView(R.layout.activity_applicant)
-        var applicantHomePageFragment = ApplicantHomePageFragment.newInstance()
-        val bundle = Bundle()
-        bundle.putSerializable("User", user)
-        applicantHomePageFragment.arguments = bundle
-
-        addFragment(applicantHomePageFragment);
 
 
         var bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottomNav)
+
+
         bottomNavigation.show(0);
         bottomNavigation.add(MeowBottomNavigation.Model(0, R.drawable.ic_round_home_24))
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_round_bookmark_24))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_baseline_chat_bubble_24))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_baseline_person_24))
-        bottomNavigation.setOnClickMenuListener {
-            when(it.id){
-                0 -> {
-                    replaceFragment(applicantHomePageFragment);
-                }
-                1 ->{
-                    replaceFragment(savedJobFragment.newInstance());
-                }
-                2 -> {
 
+        if(!user.employer!!){
+            var applicantHomePageFragment = ApplicantHomePageFragment.newInstance()
+            val bundle = Bundle()
+            bundle.putSerializable("User", user)
+            applicantHomePageFragment.arguments = bundle
 
-                }
-                3 -> {
-                    var applicantProfileFragment = ApplicantProfileFragment.newInstance()
-                    applicantProfileFragment.arguments = bundle
-                    replaceFragment(applicantProfileFragment);
+            addFragment(applicantHomePageFragment);
+            bottomNavigation.setOnClickMenuListener {
+                when(it.id){
+                    0 -> {
+                        replaceFragment(applicantHomePageFragment);
+                    }
+                    1 ->{
+                        replaceFragment(savedJobFragment.newInstance());
+                    }
+                    2 -> {
+                    }
+                    3 -> {
+                        var applicantProfileFragment = ApplicantProfileFragment.newInstance()
+                        applicantProfileFragment.arguments = bundle
+                        replaceFragment(applicantProfileFragment);
+                    }
                 }
             }
+        }else if(user.employer!!){
+
+
+
+
         }
 
 

@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -45,8 +47,15 @@ class ApplicantCvsFragment : Fragment() {
 
 
         cvRecyclerView = view.findViewById(R.id.cvRecyclerView)
+        var shimmer = view.findViewById<ShimmerFrameLayout>(R.id.cvShimmerLayout)
+        shimmer.startShimmerAnimation()
+        shimmer.visibility = View.VISIBLE
+        var fabAddCV = view.findViewById<FloatingActionButton>(R.id.fabAddCV)
+
         cvRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
         cvRecyclerView.setHasFixedSize(true)
+        cvRecyclerView.visibility = View.INVISIBLE
+
         cvList = arrayListOf();
 
         cvAdapter = CvAdapter(view.context, cvList)
@@ -61,6 +70,9 @@ class ApplicantCvsFragment : Fragment() {
                         var cv: Cv = cvSnapshot.getValue<Cv>()!!
                         cvList.add(cv)
                     }
+                    cvRecyclerView.visibility = View.VISIBLE
+                    shimmer.stopShimmerAnimation()
+                    shimmer.visibility = View.GONE
                     cvAdapter.notifyDataSetChanged()
                 }
             }
@@ -78,13 +90,20 @@ class ApplicantCvsFragment : Fragment() {
             bundle.putParcelable("CV", cv)
             bundle.putParcelable("CVPhoto", bitmap)
             cvDetailedFragment.arguments = bundle
-            transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)
+            transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)?.addToBackStack(null)
             transaction?.commit()
-
-
-
         }
 
+        fabAddCV.setOnClickListener{
+            val createApplicantCvPage = CreateApplicantCvPage()
+            val transaction = fragmentManager?.beginTransaction()
+            val bundle = Bundle()
+            bundle.putSerializable("User", user)
+            createApplicantCvPage.arguments = bundle
+            transaction?.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up);
+            transaction?.replace(R.id.fragmentContainer, createApplicantCvPage)?.addToBackStack(null)
+            transaction?.commit()
+        }
 
 
 

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CreateApplicantCvPage"
+    android:background="@drawable/gradient_bg"
+    android:paddingTop="25dp"
+    android:paddingStart="25dp"
+    android:paddingEnd="25dp"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/closeFragment"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:tint="@color/white"
+        android:background="@drawable/ic_baseline_close_24"
+        />
+
+
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/cv_person"
+                />
+
+            <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@style/CardView"
+                android:id="@+id/cvCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                >
+                <ScrollView
+                    android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:padding="25dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:fontFamily="@font/dmsansbold"
+                            android:text="Create new CV"
+                            android:textColor="#1A73E9"
+                            android:textSize="25dp" />
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/cvTitle"
+                                android:layout_marginTop="15dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CV Title"
+                                />
+
+
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/cvLocation"
+                            android:layout_marginTop="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="City"
+                            />
+
+                        <LinearLayout
+                            android:id="@+id/skillsLayout"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/cvSkills"
+                                android:layout_marginTop="15dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Skill"
+                                />
+
+
+                        </LinearLayout>
+
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/addSkillButton"
+                            android:fontFamily="@font/dmsansbold"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:hint="ADD SKILL"
+                            app:backgroundTint="#1A73E9"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/deleteSkillButton"
+                            android:fontFamily="@font/dmsansbold"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:hint="DELETE SKILL"
+                            app:backgroundTint="#1A73E9"
+                            android:layout_height="wrap_content"/>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/cvVaccination"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="Vaccinated    "
+                            android:layout_gravity="right"
+                            />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:hint="Description">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/cvDescriptionText"
+                                android:layout_width="match_parent"
+                                android:inputType="textMultiLine"
+                                android:gravity="top"
+                                android:lines="3"
+                                android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/createCvButton"
+                            android:layout_marginTop="25dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="100dp"
+                            android:fontFamily="@font/dmsansbold"
+                            android:gravity="center"
+                            android:text="Create"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            app:backgroundTint="#1A73E9"
+                            app:cardCornerRadius="15dp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            />
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -15,15 +15,14 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import javax.sql.DataSource
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -64,6 +63,7 @@ class ApplicantProfileFragment : Fragment() {
 
         val storage = FirebaseStorage.getInstance()
 
+        var exitButton = view.findViewById<AppCompatButton>(R.id.exitButton)
 
         var myCvButton = view.findViewById<AppCompatButton>(R.id.myCvButton)
         var jobResponsesButton = view.findViewById<AppCompatButton>(R.id.jobResponsesButton)
@@ -123,8 +123,16 @@ class ApplicantProfileFragment : Fragment() {
             val bundle = Bundle()
             bundle.putSerializable("User", user)
             myCvFragmentTransaction.arguments = bundle
-            transaction?.replace(R.id.fragmentContainer, myCvFragmentTransaction)
+            transaction?.replace(R.id.fragmentContainer, myCvFragmentTransaction)?.addToBackStack(null)
             transaction?.commit()
+        }
+
+        exitButton.setOnClickListener{
+            val intent = Intent(activity, SignInActivity::class.java)
+
+            startActivity(intent)
+
+            FirebaseAuth.getInstance().signOut()
         }
 
     }
