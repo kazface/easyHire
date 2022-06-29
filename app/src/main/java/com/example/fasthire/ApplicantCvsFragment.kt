@@ -58,7 +58,8 @@ class ApplicantCvsFragment : Fragment() {
 
         cvList = arrayListOf();
 
-        cvAdapter = CvAdapter(view.context, cvList)
+        cvAdapter = CvAdapter(view.context, cvList, false)
+
         cvRecyclerView.adapter = cvAdapter
 
         database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Cvs")

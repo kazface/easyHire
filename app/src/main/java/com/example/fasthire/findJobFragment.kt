@@ -54,12 +54,16 @@ class findJobFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        //toDo (filters)
         var partTimeCheckBox = view.findViewById<CheckBox>(R.id.partTimeTypeCheckBox)
         var freelanceCheckBox = view.findViewById<CheckBox>(R.id.freelanceTypeCheckBox)
         var fullTimeCheckBox = view.findViewById<CheckBox>(R.id.fullTimeTypeCheckBox)
         partTimeCheckBox.isChecked = true
         fullTimeCheckBox.isChecked = true
         freelanceCheckBox.isChecked = true
+
+
 
         var jobCardShimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobCardShimmer)
         jobCardShimmer.startShimmerAnimation();

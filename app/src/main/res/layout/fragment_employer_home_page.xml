@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ApplicantHomePageFragment"
+    tools:context=".EmployerHomePageFragment"
     android:background="@drawable/background3"
     >
 
@@ -42,7 +42,7 @@
             android:textSize="25dp" />
 
         <RelativeLayout
-            android:id="@+id/find_job_card_background"
+            android:id="@+id/create_job_card_background"
             android:layout_width="wrap_content"
             android:layout_height="152dp"
             android:layout_below="@+id/helloTextLayout"
@@ -58,122 +58,50 @@
                 android:textSize="30dp" />
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/dmsansbold"
-            android:text="Top categories"
-            android:textColor="#1A73E9"
-            android:textSize="25dp" />
-
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alignmentMode="alignMargins"
-            android:columnCount="2"
-            android:columnOrderPreserved="false"
-            android:rowCount="2"
-
-            >
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/topCatCard1"
-                style="@style/CardView"
-                android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/watch_resume_card_background"
+            android:layout_width="wrap_content"
+            android:layout_height="152dp"
+            android:layout_below="@+id/helloTextLayout"
+            android:background="@drawable/watch_resume_background">
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                android:backgroundTint="#AFECFE"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:fontFamily="@font/dmsansbold"
-                    android:gravity="center"
-
-                    android:text="Full time job"
-                    android:textColor="#0D0140"
-                    android:textSize="15dp" />
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="35dp"
+                android:fontFamily="@font/dmsansbold"
+                android:text="Check CVs"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+        </RelativeLayout>
 
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/topCatCard2"
-                style="@style/CardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                android:backgroundTint="#BEAFFE"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:fontFamily="@font/dmsansbold"
-                    android:gravity="center"
-                    android:text="Part Time Job"
-                    android:textColor="#0D0140"
-                    android:textSize="15dp" />
-
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </GridLayout>
-
-        <TextView
+        <RelativeLayout
+            android:id="@+id/create_company_card_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/dmsansbold"
-            android:text="Recent Job"
-            android:textColor="#1A73E9"
-            android:textSize="25dp" />
+            android:layout_height="152dp"
+            android:layout_below="@+id/helloTextLayout"
+            android:background="@drawable/create_company_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="90px"
+                android:fontFamily="@font/dmsansbold"
+                android:gravity="right"
+                android:text="Create company"
+                android:textColor="@color/white"
+                android:textSize="23dp" />
+        </RelativeLayout>
 
 
     </LinearLayout>
 
 
 
-    <RelativeLayout
-        android:layout_below="@id/helloTextLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
-
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/jobCardShimmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <include layout="@layout/job_card_shimmer"/>
-
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recentJobCardRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/job_card"
-            />
-
-
-    </RelativeLayout>
 
 
 

@@ -58,10 +58,10 @@ class SignInActivity : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener{
                     if(it.isSuccessful){
 
-
                         var database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users")
-
                         val userid = firebaseAuth.currentUser!!.uid
+
+
 
                         var intent = Intent(this, ApplicantActivity::class.java)
                         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()

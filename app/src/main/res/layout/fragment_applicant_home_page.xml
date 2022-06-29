@@ -8,8 +8,6 @@
     android:background="@drawable/background3"
     >
 
-
-
         <LinearLayout
 
             android:id="@+id/helloTextLayout"

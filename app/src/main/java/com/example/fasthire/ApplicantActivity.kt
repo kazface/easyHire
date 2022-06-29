@@ -54,7 +54,30 @@ class ApplicantActivity : AppCompatActivity() {
             }
         }else if(user.employer!!){
 
+            var employerHomePageFragment = EmployerHomePageFragment.newInstance()
+            val bundle = Bundle()
+            bundle.putSerializable("User", user)
+            employerHomePageFragment.arguments = bundle
 
+            addFragment(employerHomePageFragment);
+            bottomNavigation.setOnClickMenuListener {
+                when(it.id){
+                    0 -> {
+                        replaceFragment(employerHomePageFragment);
+                    }
+
+                    1 ->{
+                        replaceFragment(SavedCvsFragment.newInstance());
+                    }
+                    2 -> {
+                    }
+                    3 -> {
+//                        var applicantProfileFragment = ApplicantProfileFragment.newInstance()
+//                        applicantProfileFragment.arguments = bundle
+//                        replaceFragment(applicantProfileFragment);
+                    }
+                }
+            }
 
 
         }

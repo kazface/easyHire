@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +29,42 @@ class EmployerHomePageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        var userFullNameText = view.findViewById<TextView>(R.id.userFullNameText)
+
+
+        userFullNameText.text = user.fullName.toString()
+
+
+        var createJobLayout = view.findViewById<RelativeLayout>(R.id.create_job_card_background)
+
+
+        var createCompanyLayout = view.findViewById<RelativeLayout>(R.id.create_company_card_background)
+
+
+        var watchCvs = view.findViewById<RelativeLayout>(R.id.watch_resume_card_background)
+
+
+        createJobLayout.setOnClickListener{
+
+        }
+
+
+        createCompanyLayout.setOnClickListener{
+
+        }
+
+
+        watchCvs.setOnClickListener{
+            val findCvsFragment = findCvsFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.fragmentContainer, findCvsFragment)?.addToBackStack(null)
+            transaction?.commit()
+
+        }
+
+
 
     }
 

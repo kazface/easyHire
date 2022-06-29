@@ -25,11 +25,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
-class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>): RecyclerView.Adapter<CvAdapter.ViewHolder>() {
+class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>, val isSavedShow: Boolean = true): RecyclerView.Adapter<CvAdapter.ViewHolder>() {
     var savedJobList: ArrayList<Cv>? = null
     init{
         savedJobList = ArrayList(cvList)
     }
+
+
+
+
 
     var onItemClick : ((cv: Cv, bitmap: Bitmap) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,13 +44,16 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>): Recycl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
 
-        val cv = cvList[position]
+        val cv: Cv = cvList[position]
 
 
         holder.cvCardView.setOnClickListener{
             onItemClick?.invoke(cv, holder.cvPictureImage.drawable.toBitmap())
         }
 
+        if(!isSavedShow){
+            holder.saveCheckBox.visibility = View.INVISIBLE
+        }
 
         val storage = FirebaseStorage.getInstance()
         var profilePhotoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/profilePhotos/${cv.email}")
@@ -86,13 +93,34 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>): Recycl
             })
             .into(holder.cvPictureImage)
 
+        holder.saveCheckBox.isChecked = (cv.saved == 1)
 
         holder.cvTitle.text = cv.title.toString()
         holder.cvDescriptionText.text = cv.description.toString()
         holder.cvLocation.text = cv.location.toString()
         holder.cvFullName.text = cv.fullName.toString()
 
+        holder.saveCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            var firebaseAuth: FirebaseAuth
+            var database : FirebaseDatabase = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/")
+            firebaseAuth = FirebaseAuth.getInstance()
+            val currentUser = firebaseAuth.currentUser!!.uid
 
+            var jobsRef = database
+                .getReference("SavedCvs")
+            Log.d("IsChecked", isChecked.toString())
+            if(isChecked){
+                cv.saved = 1
+                cv.id?.let {
+                    jobsRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child(it)
+                        .setValue(true).addOnCompleteListener{
+                        }
+                };
+            }else{
+                cv.saved = 0
+                cv.id?.let { jobsRef.child(FirebaseAuth.getInstance().currentUser!!.uid).child(it).removeValue() }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -109,6 +137,10 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>): Recycl
         var progressBar = itemView.findViewById<ProgressBar>(R.id.progressCvBar);
 
         var cvPictureImage = itemView.findViewById<ImageView>(R.id.cvPictureImage);
+
+
+        var saveCheckBox = itemView.findViewById<CheckBox>(R.id.saveCheckBox);
+
     }
 
 

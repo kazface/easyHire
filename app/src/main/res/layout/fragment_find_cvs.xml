@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".findCvsFragment"
+    android:background="@drawable/background3"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/cvSearchView"
+        app:queryHint="Search Cv title"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@android:color/transparent"
+        android:background="@drawable/search_view_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_below="@id/cvSearchView"
+        android:id="@+id/cvCardShimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/cv_card_shimmer"/>
+            <include layout="@layout/cv_card_shimmer"/>
+            <include layout="@layout/cv_card_shimmer"/>
+            <include layout="@layout/cv_card_shimmer"/>
+            <include layout="@layout/cv_card_shimmer"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <LinearLayout
+        android:layout_below="@id/cvSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cvRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/cv_card"
+            />
+
+    </LinearLayout>
+</RelativeLayout>
+
+

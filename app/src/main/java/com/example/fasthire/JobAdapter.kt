@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobAdapter.ViewHolder>() {
+class JobAdapter(private val jobList: ArrayList<Job>, var isSavedShow: Boolean = true): RecyclerView.Adapter<JobAdapter.ViewHolder>() {
     var savedJobList: ArrayList<Job>? = null
     init{
         savedJobList = ArrayList(jobList)
@@ -27,8 +27,9 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
         return ViewHolder(itemView)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val job = jobList[position]
+        val job: Job = jobList[position]
         holder.companyName.text = job.companyName
         holder.jobPositionText.text = job.title
         holder.jobLocation.text = job.location
@@ -39,6 +40,10 @@ class JobAdapter(private val jobList: ArrayList<Job>): RecyclerView.Adapter<JobA
             onItemClick?.invoke(job)
         }
         holder.saveCheckBox.isChecked = (job.saved == 1)
+
+        if(!isSavedShow){
+            holder.saveCheckBox.visibility = View.INVISIBLE
+        }
 
 
         holder.saveCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
