@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.ArrayList
 
-data class Company(var id: String? = null, var name: String? = null, var location: String?, var uid: String? = nullv) : Parcelable {
+data class Company(var id: String? = null, var name: String? = null, var location: String?, var uid: String? = null) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
