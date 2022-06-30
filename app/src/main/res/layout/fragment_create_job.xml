@@ -3,46 +3,253 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background3"
     tools:context=".CreateJobFragment">
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="35dp"
-        android:layout_marginTop="35dp"
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
-
-        <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dmsansbold"
+                android:text="General information"
+                android:textColor="#150B3D"
+                android:textSize="25sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Job title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <Spinner
-            android:backgroundTint="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-    </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/white"
+                android:hint="Salary (RM)"
+                app:prefixText="RM"
+                app:prefixTextColor="@color/black">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <RadioGroup
+                android:id="@+id/jobTypesGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal"
+                >
+
+
+                <RadioButton
+                    android:checked="true"
+                    android:id="@+id/fullTimeOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="5dp"
+                    android:text="Full Time"
+                    android:textColor="@drawable/radio_button_text" />
+
+                <RadioButton
+                    android:id="@+id/partTimeOption"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="5dp"
+                    android:text="Part Time"
+                    android:textColor="@drawable/radio_button_text" />
+
+                <RadioButton
+                    android:id="@+id/internshipOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="5dp"
+                    android:text="Internship"
+                    android:textColor="@drawable/radio_button_text" />
+
+                <RadioButton
+                    android:id="@+id/freelanceOption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:elevation="4dp"
+                    android:padding="5dp"
+                    android:text="Freelance"
+                    android:textColor="@drawable/radio_button_text" />
+
+            </RadioGroup>
+
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/cvVaccination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:hint="Vaccination needed    " />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dmsansbold"
+                android:text="Company"
+                android:textColor="#150B3D"
+                android:textSize="25dp" />
+
+            <Spinner
+                android:id="@+id/selectCompanySpinner"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Create company" />
+
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/dmsansbold"
+                android:text="Job period"
+                android:textColor="#150B3D"
+                android:textSize="25dp" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/jobPeriodDuration"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Duration"
+                android:inputType="number" />
+
+            <Spinner
+                android:id="@+id/jobPeriodType"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/dmsansbold"
+                android:text="Job Information"
+                android:textColor="#150B3D"
+                android:textSize="25dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Job description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+
+                    android:inputType="textMultiLine"
+
+                    android:lines="5"
+                    android:maxLength="300" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/skillsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cvSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:hint="Skill" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addSkillButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dmsansbold"
+                android:hint="ADD SKILL"
+                android:textColor="@color/white"
+                app:backgroundTint="#1A73E9" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/deleteSkillButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dmsansbold"
+                android:hint="DELETE SKILL"
+                android:textColor="@color/white"
+                app:backgroundTint="#1A73E9" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp">
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 

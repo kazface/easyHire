@@ -110,6 +110,7 @@
                             android:hint="ADD SKILL"
                             app:backgroundTint="#1A73E9"
                             android:layout_height="wrap_content"/>
+
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/deleteSkillButton"
                             android:fontFamily="@font/dmsansbold"

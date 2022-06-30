@@ -21,8 +21,6 @@ import com.google.firebase.storage.FirebaseStorage
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +29,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class CreateCompanyFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
     private var user: User? = null
     private var imageUri: Uri? = null
     private  var companyLogoImage: ImageView? = null
@@ -52,7 +49,7 @@ class CreateCompanyFragment : Fragment() {
         var companyName = view.findViewById<TextInputEditText>(R.id.companyName)
         var companyAddress = view.findViewById<TextInputEditText>(R.id.companyAddress)
         var database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Companies")
-
+        var createCompanyButton = view.findViewById<AppCompatButton>(R.id.createCompanyButton)
 
         fun isFormValid(): Boolean{
             if(companyName.text!!.isEmpty() || companyAddress.text!!.isEmpty()){
@@ -61,27 +58,37 @@ class CreateCompanyFragment : Fragment() {
             }
             return true
         }
-        val progressBar = ProgressDialog(activity)
-        progressBar.setMessage("Creating...")
-        progressBar.setCancelable(false)
-        progressBar.show()
 
 
-        var company: Company = Company(null, companyName.text.toString(), companyAddress.toString())
+        createCompanyButton.setOnClickListener{
+
+            if(isFormValid()){
+                val progressBar = ProgressDialog(activity)
+                progressBar.setMessage("Creating...")
+                progressBar.setCancelable(false)
+                progressBar.show()
 
 
-        val storage = FirebaseStorage.getInstance()
-        var profilePhotoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/companyLogos/${company.name}")
+                var company: Company = Company(null, companyName.text.toString(), companyAddress.text.toString())
 
-        FirebaseAuth.getInstance().uid?.let {
-            database.child(it).push().setValue(company).addOnSuccessListener {
-                profilePhotoRef.putFile(imageUri!!).addOnSuccessListener {
-                    progressBar.hide()
-                }.addOnFailureListener{
-                    progressBar.hide()
+
+                val storage = FirebaseStorage.getInstance()
+                var profilePhotoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/companyLogos/${company.name}")
+
+            FirebaseAuth.getInstance().uid?.let {
+                database.child(it).push().setValue(company).addOnSuccessListener {
+                    profilePhotoRef.putFile(imageUri!!).addOnSuccessListener {
+                        progressBar.hide()
+                        Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener{
+                        progressBar.hide()
+                        Toast.makeText(view.context, "Failed. Please try again", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
+            }
         }
+
 
         addImageButton.setOnClickListener{
             launchGallery()
@@ -133,11 +140,9 @@ class CreateCompanyFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             CreateCompanyFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
                 }
             }
     }

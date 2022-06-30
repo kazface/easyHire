@@ -47,12 +47,23 @@ class EmployerHomePageFragment : Fragment() {
 
 
         createJobLayout.setOnClickListener{
+            val createJobFragment = CreateJobFragment();
+            val bundle: Bundle = Bundle();
+            bundle.putSerializable("User", user)
+            createJobFragment.arguments = bundle;
+            fragmentManager?.beginTransaction()?.replace(R.id.fragmentContainer, createJobFragment)
+                ?.addToBackStack(null)?.commit()
 
         }
 
 
         createCompanyLayout.setOnClickListener{
-
+            val createCompanyFragment = CreateCompanyFragment();
+            val bundle: Bundle = Bundle();
+            bundle.putSerializable("User", user)
+            createCompanyFragment.arguments = bundle;
+            fragmentManager?.beginTransaction()?.replace(R.id.fragmentContainer, createCompanyFragment)
+                ?.addToBackStack(null)?.commit()
         }
 
 
