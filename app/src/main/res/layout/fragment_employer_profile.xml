@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EmployerProfileFragment">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/gradient_bg">
+
+        <RelativeLayout
+
+            android:id="@+id/userProfilePicLayout"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:backgroundTint="#DDBCBCBC"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="75dp"
+                app:cardPreventCornerOverlap="false">
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible" />
+
+
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/userProfilePic"
+                    android:src="@drawable/profile_pic_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addImageButton"
+                android:background="@drawable/add_white"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/userFullName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userProfilePicLayout"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/dmsansbold"
+            android:gravity="center"
+            android:text="Kakimov Batyrkhan"
+            android:textColor="@color/white"
+            android:textSize="25dp" />
+    </RelativeLayout>
+
+
+
+    <ScrollView
+        android:layout_below="@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@style/CardView"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_margin="12dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/userEmail"
+                        android:layout_marginTop="25dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dmsansbold"
+                        android:textSize="20dp"
+                        android:text="batyr@gmail.com"
+                        />
+                    <TextView
+                        android:id="@+id/userPhone"
+                        android:layout_marginTop="25dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dmsansbold"
+                        android:textSize="20dp"
+                        android:text="+77070225287"
+                        />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/postedWorksButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_primary_button"
+                android:text="Posted works"
+                android:fontFamily="@font/dmsansbold"
+                android:textColor="@color/white"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/exitButton"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_primary_button"
+                android:text="Exit"
+                android:fontFamily="@font/dmsansbold"
+                android:textColor="@color/white"
+                />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
