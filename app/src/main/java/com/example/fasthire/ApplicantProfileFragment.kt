@@ -118,6 +118,8 @@ class ApplicantProfileFragment : Fragment() {
         }
 
         myCvButton.setOnClickListener{
+
+
             val myCvFragmentTransaction = ApplicantCvsFragment()
             val transaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
@@ -125,6 +127,8 @@ class ApplicantProfileFragment : Fragment() {
             myCvFragmentTransaction.arguments = bundle
             transaction?.replace(R.id.fragmentContainer, myCvFragmentTransaction)?.addToBackStack(null)
             transaction?.commit()
+
+
         }
 
         exitButton.setOnClickListener{

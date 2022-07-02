@@ -72,9 +72,9 @@ class ApplicantActivity : AppCompatActivity() {
                     2 -> {
                     }
                     3 -> {
-//                        var applicantProfileFragment = ApplicantProfileFragment.newInstance()
-//                        applicantProfileFragment.arguments = bundle
-//                        replaceFragment(applicantProfileFragment);
+                        var employerProfileFragment = EmployerProfileFragment.newInstance()
+                        employerProfileFragment.arguments = bundle
+                        replaceFragment(employerProfileFragment);
                     }
                 }
             }
