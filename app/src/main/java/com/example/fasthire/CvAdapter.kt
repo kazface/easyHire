@@ -135,11 +135,10 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>, val isS
         var cvLocation = itemView.findViewById<TextView>(R.id.cvLocation);
         var cvFullName = itemView.findViewById<TextView>(R.id.cvFullName);
         var progressBar = itemView.findViewById<ProgressBar>(R.id.progressCvBar);
-
         var cvPictureImage = itemView.findViewById<ImageView>(R.id.cvPictureImage);
-
-
         var saveCheckBox = itemView.findViewById<CheckBox>(R.id.saveCheckBox);
+
+
 
     }
 

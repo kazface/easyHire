@@ -43,6 +43,8 @@ class JobAdapter(private val jobList: ArrayList<Job>, var isSavedShow: Boolean =
 
         if(!isSavedShow){
             holder.saveCheckBox.visibility = View.INVISIBLE
+            holder.applyButton.visibility = View.INVISIBLE
+
         }
 
 

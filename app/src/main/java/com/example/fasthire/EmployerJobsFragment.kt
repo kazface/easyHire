@@ -1,6 +1,5 @@
 package com.example.fasthire
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,10 +20,10 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 
-class EmployerCvsFragment : Fragment() {
-    private lateinit var cvRecyclerView: RecyclerView;
-    private lateinit var cvList: ArrayList<Cv>
-    private lateinit var cvAdapter: CvAdapter
+class EmployerJobsFragment : Fragment() {
+    private lateinit var jobRecyclerView: RecyclerView;
+    private lateinit var jobList: ArrayList<Job>
+    private lateinit var jobAdapter: JobAdapter
     private lateinit var database: DatabaseReference
     private lateinit var user: User
 
@@ -39,63 +38,69 @@ class EmployerCvsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        cvRecyclerView = view.findViewById(R.id.cvRecyclerView)
-        var shimmer = view.findViewById<ShimmerFrameLayout>(R.id.cvShimmerLayout)
+        jobRecyclerView = view.findViewById(R.id.jobRecyclerView)
+        var shimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobShimmerLayout)
         shimmer.startShimmerAnimation()
         shimmer.visibility = View.VISIBLE
-        var fabAddCV = view.findViewById<FloatingActionButton>(R.id.fabAddCV)
+        var fabAddCV = view.findViewById<FloatingActionButton>(R.id.fabAddJob)
 
-        cvRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
-        cvRecyclerView.setHasFixedSize(true)
-        cvRecyclerView.visibility = View.INVISIBLE
+        jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
+        jobRecyclerView.setHasFixedSize(true)
+        jobRecyclerView.visibility = View.INVISIBLE
 
-        cvList = arrayListOf();
+        jobList = arrayListOf();
 
-        cvAdapter = CvAdapter(view.context, cvList, false)
+        jobAdapter = JobAdapter(jobList, false)
 
-        cvRecyclerView.adapter = cvAdapter
+        jobRecyclerView.adapter = jobAdapter
 
-        database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Cvs")
-        var userCvsRef = FirebaseAuth.getInstance().uid?.let { database.child(it) }
-        userCvsRef!!.addValueEventListener(object : ValueEventListener{
+        database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Jobs")
+        database.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     for(cvSnapshot in snapshot.children){
-                        var cv: Cv = cvSnapshot.getValue<Cv>()!!
-                        cvList.add(cv)
+                        var job: Job = cvSnapshot.getValue<Job>()!!
+                        job.id = cvSnapshot.key
+                        Log.d("snapshot", job.toString())
+                        Log.d("id", user.id.toString())
+
+                        if(job.userId.toString() == FirebaseAuth.getInstance().uid.toString())
+                            jobList.add(job)
                     }
-                    cvRecyclerView.visibility = View.VISIBLE
+                    jobRecyclerView.visibility = View.VISIBLE
                     shimmer.stopShimmerAnimation()
                     shimmer.visibility = View.GONE
-                    cvAdapter.notifyDataSetChanged()
+                    jobAdapter.notifyDataSetChanged()
                 }
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
-        cvAdapter.notifyDataSetChanged()
+        jobAdapter.notifyDataSetChanged()
 
 
-        cvAdapter.onItemClick = { cv: Cv, bitmap: Bitmap ->
-            val cvDetailedFragment = CvDetailedFragment()
-            val transaction = fragmentManager?.beginTransaction()
+        jobAdapter.onItemClick = {
+            val jobDetailedFragment = jobDetailedFragment()
             val bundle = Bundle()
-            bundle.putParcelable("CV", cv)
-            bundle.putParcelable("CVPhoto", bitmap)
-            cvDetailedFragment.arguments = bundle
-            transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)?.addToBackStack(null)
+
+            bundle.putParcelable("Job", it)
+            bundle.putBoolean("isEdit", true)
+
+            jobDetailedFragment.arguments = bundle
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)
             transaction?.commit()
         }
 
         fabAddCV.setOnClickListener{
-            val createApplicantCvPage = CreateApplicantCvPage()
+            val createJobFragment = CreateJobFragment();
             val transaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
             bundle.putSerializable("User", user)
-            createApplicantCvPage.arguments = bundle
+            createJobFragment.arguments = bundle
             transaction?.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_up);
-            transaction?.replace(R.id.fragmentContainer, createApplicantCvPage)?.addToBackStack(null)
+            transaction?.replace(R.id.fragmentContainer, createJobFragment)?.addToBackStack(null)
             transaction?.commit()
         }
 
@@ -115,7 +120,7 @@ class EmployerCvsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            EmployerCvsFragment().apply {
+            EmployerJobsFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

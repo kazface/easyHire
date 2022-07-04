@@ -1,16 +1,22 @@
 package com.example.fasthire
 
+import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 
@@ -27,11 +33,13 @@ private const val ARG_PARAM2 = "param2"
 class jobDetailedFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var job: Job? = null
+    private var isEdit: Boolean? = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             job = it.getParcelable("Job")
+            isEdit = it.getBoolean("isEdit")
         }
 
 
@@ -46,7 +54,12 @@ class jobDetailedFragment : Fragment() {
         var jobLocation = view.findViewById<TextView>(R.id.jobLocation)
         var vaccinationInfoLayout = view.findViewById<LinearLayout>(R.id.vaccinationInfoLayout)
         var skillsNeededText = view.findViewById<TextView>(R.id.skillsNeededText)
-        Log.d("JOB", job.toString())
+        var applyButton = view.findViewById<Button>(R.id.applyButton)
+
+        var deleteJob = view.findViewById<AppCompatButton>(R.id.deleteJob)
+        var editJob = view.findViewById<AppCompatButton>(R.id.editJob)
+
+
 
         fun Int.toBoolean() = this == 1
         var companyLogoImage = view.findViewById<ImageView>(R.id.companyLogoImage);
@@ -70,7 +83,60 @@ class jobDetailedFragment : Fragment() {
         companyNameText.text = job?.companyName
         jobDescrText.text = job?.jobDescription!!.replace("\\n", "\n")
         jobPositionNameText.text = job?.title
+        Log.d("isApply", isEdit.toString())
+//        applyButton.visibility = if(isApply) View.VISIBLE else View.INVISIBLE
 
+        if(isEdit == true){
+            applyButton.visibility = View.INVISIBLE
+        }
+        if(isEdit == false){
+            deleteJob.visibility = View.INVISIBLE
+            editJob.visibility = View.INVISIBLE
+
+        }
+
+
+        editJob.setOnClickListener{
+            val editJobFragment = EditJobFragment();
+            val bundle: Bundle = Bundle();
+            bundle.putParcelable("Job", job)
+            editJobFragment.arguments = bundle;
+            fragmentManager?.beginTransaction()?.replace(R.id.fragmentContainer, editJobFragment)
+                ?.addToBackStack(null)?.commit()
+        }
+
+
+        deleteJob.setOnClickListener{
+            val builder = AlertDialog.Builder(view.context)
+            builder.setMessage("Are you sure you want to Delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+                    val progressBar = ProgressDialog(activity)
+                    progressBar.setMessage("Deleting...")
+                    progressBar.setCancelable(false)
+                    progressBar.show()
+                    var database = job!!.id?.let { it1 ->
+                        Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/")
+                            .getReference("Jobs")
+                            .child(it1).removeValue().addOnSuccessListener {
+                                progressBar.hide()
+                            }
+                    }
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
+
+        }
+
+        applyButton.setOnClickListener{
+
+
+        }
 
 
 

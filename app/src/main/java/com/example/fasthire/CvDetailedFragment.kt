@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,11 +24,17 @@ class CvDetailedFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var cv: Cv
     private lateinit var cvPhoto: Bitmap
+
+    private  var isOffer = false
+    private  var user: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             cv = it.getParcelable<Cv>("CV")!!
             cvPhoto = it.getParcelable<Bitmap>("CVPhoto")!!
+            isOffer = it.getBoolean("isOffer")
+            user = it.getSerializable("User") as User
         }
     }
 
@@ -49,6 +56,13 @@ class CvDetailedFragment : Fragment() {
         var cvPhone = view.findViewById<TextView>(R.id.cvPhone)
         var cvDescriptionText = view.findViewById<TextView>(R.id.cvDescriptionText)
         var cvSkills = view.findViewById<TextView>(R.id.cvSkills)
+        var offerButton = view.findViewById<AppCompatButton>(R.id.offerButton)
+
+        if(!isOffer){
+            offerButton.visibility = View.INVISIBLE
+        }
+
+
 
         cvPictureImage.setImageBitmap(cvPhoto)
         userFullName.text = cv.fullName
@@ -59,6 +73,22 @@ class CvDetailedFragment : Fragment() {
         cvDescriptionText.text = cv.description
         var skills = cv.skills?.joinToString(separator = "\n")
         cvSkills.text = skills
+
+        offerButton.setOnClickListener{
+
+            val selectJob = SelectJob();
+            val bundle: Bundle = Bundle();
+            bundle.putSerializable("User", user)
+            bundle.putParcelable("Cv", cv)
+
+            selectJob.arguments = bundle;
+            fragmentManager?.beginTransaction()?.replace(R.id.fragmentContainer, selectJob)
+                ?.addToBackStack(null)?.commit()
+
+
+
+        }
+
     }
 
     companion object {

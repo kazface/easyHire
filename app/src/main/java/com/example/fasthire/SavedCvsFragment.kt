@@ -1,5 +1,6 @@
 package com.example.fasthire
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,10 +27,12 @@ class SavedCvsFragment : Fragment() {
     private lateinit var cvList: ArrayList<Cv>
     private lateinit var cvAdapter: CvAdapter
     private lateinit var database: DatabaseReference
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.getSerializable("User") as User
         }
     }
 
@@ -127,6 +130,26 @@ class SavedCvsFragment : Fragment() {
             filterData()
             swiperefresh.isRefreshing = false
         }
+
+
+        cvAdapter.onItemClick = { cv: Cv, bitmap: Bitmap ->
+            val cvDetailedFragment = CvDetailedFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            val bundle = Bundle()
+            bundle.putParcelable("CV", cv)
+            bundle.putParcelable("CVPhoto", bitmap)
+            bundle.putBoolean("isOffer", true)
+            bundle.putSerializable("User", user)
+
+
+            cvDetailedFragment.arguments = bundle
+            transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)?.addToBackStack(null)
+            transaction?.commit()
+        }
+
+
+
+
 
     }
 

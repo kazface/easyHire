@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CardView"
+    android:id="@+id/userCardView"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="12dp"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/userPictureLayout"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                >
+                <androidx.cardview.widget.CardView
+                    android:backgroundTint="#DDBCBCBC"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="75dp"
+                    app:cardPreventCornerOverlap="false"
+                    >
+                    <ProgressBar
+                        android:id="@+id/progressUserBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible" />
+                    <ImageView
+                        android:scaleType="centerCrop"
+                        android:id="@+id/userPictureImage"
+                        android:src="@drawable/profile_pic_gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/dmsansbold"
+                    android:text="Kakimov Batyrkhan"
+                    android:textColor="#150B3D"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/userLastMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:fontFamily="@font/dmsansregular"
+                    android:text="Last message sample textLast message sample textLast message sample text"
+                    android:textColor="#1A73E9"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+

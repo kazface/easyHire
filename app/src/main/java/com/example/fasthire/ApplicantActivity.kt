@@ -44,6 +44,10 @@ class ApplicantActivity : AppCompatActivity() {
                         replaceFragment(savedJobFragment.newInstance());
                     }
                     2 -> {
+                        var selectChatFragment = SelectChatFragment.newInstance()
+                        selectChatFragment.arguments = bundle
+                        replaceFragment(selectChatFragment);
+
                     }
                     3 -> {
                         var applicantProfileFragment = ApplicantProfileFragment.newInstance()
@@ -67,9 +71,16 @@ class ApplicantActivity : AppCompatActivity() {
                     }
 
                     1 ->{
-                        replaceFragment(SavedCvsFragment.newInstance());
+                        var savedCvsFragment = SavedCvsFragment.newInstance()
+                        savedCvsFragment.arguments = bundle
+                        replaceFragment(savedCvsFragment);
                     }
                     2 -> {
+
+                        var selectChatFragment = SelectChatFragment.newInstance()
+                        selectChatFragment.arguments = bundle
+                        replaceFragment(selectChatFragment);
+
                     }
                     3 -> {
                         var employerProfileFragment = EmployerProfileFragment.newInstance()

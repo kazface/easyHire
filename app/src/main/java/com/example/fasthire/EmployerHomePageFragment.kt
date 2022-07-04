@@ -69,6 +69,9 @@ class EmployerHomePageFragment : Fragment() {
 
         watchCvs.setOnClickListener{
             val findCvsFragment = findCvsFragment()
+            val bundle: Bundle = Bundle();
+            bundle.putSerializable("User", user)
+            findCvsFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainer, findCvsFragment)?.addToBackStack(null)
             transaction?.commit()

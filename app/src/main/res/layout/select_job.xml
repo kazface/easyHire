@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmployerJobsFragment"
+    tools:context=".SelectJob"
    android:background="@drawable/background3"
     >
 
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0"
-        android:text="My posted jobs"
+        android:text="Select job"
         android:fontFamily="@font/dmsansbold"
         android:textColor="#1A73E9"
         android:textSize="25sp" />
@@ -57,22 +57,6 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:tint="@color/white"
-        android:id="@+id/fabAddJob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#1A73E9"
-        android:src="@drawable/ic_baseline_add_24"
-        android:layout_marginBottom="100dp"
-        android:contentDescription="+" />
 
 
 </RelativeLayout>

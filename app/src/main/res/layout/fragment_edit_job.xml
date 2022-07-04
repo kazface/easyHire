@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background3"
-    tools:context=".CreateJobFragment">
+    tools:context=".EditJobFragment">
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -17,7 +17,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="100dp"
-        android:text="Place job"
+        android:text="Edit job"
         android:textColor="@color/white"
         android:fontFamily="@font/dmsansbold"
         android:textSize="20dp"
@@ -163,13 +163,6 @@
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@color/black" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/createCompanyButton"
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Create company" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -240,12 +233,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cvSkills"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:hint="Skill" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton

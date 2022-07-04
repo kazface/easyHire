@@ -115,7 +115,7 @@ class EmployerProfileFragment : Fragment() {
 
         postedWorksButton.setOnClickListener{
 
-            val employerCvsFragment = EmployerCvsFragment()
+            val employerCvsFragment = EmployerJobsFragment()
             val transaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
             bundle.putSerializable("User", user)

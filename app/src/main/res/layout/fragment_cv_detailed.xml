@@ -230,7 +230,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"/>
+                android:layout_height="150dp"/>
         </LinearLayout>
 
 
@@ -238,10 +238,19 @@
 
     </ScrollView>
 
-
-
-
-
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/offerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/rounded_primary_button"
+        android:fontFamily="@font/dmsansbold"
+        android:text="Offer a job"
+        app:cardCornerRadius="15dp" />
 
 </RelativeLayout>

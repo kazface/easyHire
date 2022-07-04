@@ -37,6 +37,7 @@ class findCvsFragment : Fragment() {
     private lateinit var cvList: ArrayList<Cv>
     private lateinit var cvListSaved: ArrayList<Cv>
     private lateinit var cvAdapter: CvAdapter
+    private  var user: User? = null
 
 
     private lateinit var database: DatabaseReference
@@ -44,6 +45,7 @@ class findCvsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.getSerializable("User") as User
         }
     }
 
@@ -116,26 +118,28 @@ class findCvsFragment : Fragment() {
                             Log.d("Check", cv.toString())
 
                         }
-
-
                     }
-
                 }
-
-
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
 
 
         cvAdapter.onItemClick = { cv: Cv, bitmap: Bitmap ->
+            val cvDetailedFragment = CvDetailedFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            val bundle = Bundle()
+            bundle.putParcelable("CV", cv)
+            bundle.putParcelable("CVPhoto", bitmap)
+            bundle.putBoolean("isOffer", true)
 
+            bundle.putSerializable("User", user)
 
-
+            cvDetailedFragment.arguments = bundle
+            transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)?.addToBackStack(null)
+            transaction?.commit()
         }
 
 
