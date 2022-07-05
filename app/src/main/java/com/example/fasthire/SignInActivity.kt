@@ -69,10 +69,6 @@ class SignInActivity : AppCompatActivity() {
                             override fun onDataChange(snapshot: DataSnapshot) {
                                 var user = snapshot.getValue<User>()
 
-                                Log.d("User", user.toString())
-                                Log.d("User", user!!.employer.toString())
-                                Log.d("User", user!!.fullName.toString())
-                                Log.d("User", user!!.phone.toString())
 
                                 startActivity(intent.putExtra(
                                     "User",

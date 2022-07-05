@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MessengerFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1A73E9">
+
+            <TextView
+                android:id="@+id/userFullNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_margin="25dp"
+                android:layout_weight="0"
+                android:fontFamily="@font/dmsansbold"
+                android:text="Kakimov Batyrkhan"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.google.android.material.button.MaterialButton
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
+                    android:id="@+id/appliedCvButton"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Applied CV"/>
+                <com.google.android.material.button.MaterialButton
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/black"
+                    android:id="@+id/appliedJobButton"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Job"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        tools:listitem="@layout/message_left_card"></androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_marginBottom="100dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:baselineAligned="true">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_weight="1"
+
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusTopStart="25dp"
+            app:boxCornerRadiusTopEnd="25dp"
+
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInput"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+                <requestFocus/>
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_primary_button"
+            android:text="Send"
+            android:textColor="@color/white"
+            android:fontFamily="@font/dmsansbold"
+            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:id="@+id/sendButton" />
+    </LinearLayout>
+
+
+</RelativeLayout>

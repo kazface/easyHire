@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:padding="5dp"
+        android:id="@+id/chatLayout"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/message_bg"
+        android:layout_toRightOf="@+id/userHead"
+        android:orientation="vertical">
+
+        <TextView
+            android:paddingTop="5dp"
+            android:text="SampleSampleSample  ?"
+            android:inputType="textMultiLine"
+            android:id="@+id/txtMessage"
+            android:textSize="16sp"
+            android:fontFamily="@font/dmsansregular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#FF000000" />
+
+        <TextView
+            android:layout_below="@id/txtMessage"
+            android:text="12:45PM"
+            android:id="@+id/txtTime"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/white"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/userHead"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:text="User"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="16sp" />-->
+    <RelativeLayout
+
+        android:id="@+id/userHead"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:backgroundTint="#DDBCBCBC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="75dp"
+            app:cardPreventCornerOverlap="false">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/progress_bar"
+                />
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/userProfilePic"
+                android:src="@drawable/profile_pic_gray"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+</RelativeLayout>
+

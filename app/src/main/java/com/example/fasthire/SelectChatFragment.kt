@@ -21,11 +21,15 @@ import com.google.firebase.ktx.Firebase
 
 class SelectChatFragment : Fragment() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.getSerializable("User") as User
         }
     }
+    lateinit var user: User
+
     lateinit var chatRecyclerView: RecyclerView
     lateinit var chatList: ArrayList<Message>;
     lateinit var chatAdapter: UserChatAdapter
@@ -91,16 +95,15 @@ class SelectChatFragment : Fragment() {
             }
         })
 
-
         chatAdapter.onItemClick = {
-//            val cvDetailedFragment = CvDetailedFragment()
-//            val transaction = fragmentManager?.beginTransaction()
-//            val bundle = Bundle()
-//            bundle.putParcelable("CV", cv)
-//            bundle.putParcelable("CVPhoto", bitmap)
-//            cvDetailedFragment.arguments = bundle
-//            transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)?.addToBackStack(null)
-//            transaction?.commit()
+            val messengerFragment = MessengerFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            val bundle = Bundle()
+            bundle.putParcelable("Message", it)
+            bundle.putSerializable("User", user)
+            messengerFragment.arguments = bundle
+            transaction?.replace(R.id.fragmentContainer, messengerFragment)?.addToBackStack(null)
+            transaction?.commit()
         }
 
     }

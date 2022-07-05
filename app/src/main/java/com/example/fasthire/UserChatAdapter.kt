@@ -11,6 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.storage.FirebaseStorage
 
 class UserChatAdapter(private val userChatList: ArrayList<Message>, private val context : Context): RecyclerView.Adapter<UserChatAdapter.ViewHolder>() {
@@ -20,6 +21,7 @@ class UserChatAdapter(private val userChatList: ArrayList<Message>, private val 
     }
 
     var onItemClick : ((Message) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_card, parent, false)
         return ViewHolder(itemView)
@@ -63,6 +65,9 @@ class UserChatAdapter(private val userChatList: ArrayList<Message>, private val 
             })
             .into(holder.userPictureImage)
 
+        holder.userCardView.setOnClickListener{
+            onItemClick?.invoke(userChat)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -73,7 +78,9 @@ class UserChatAdapter(private val userChatList: ArrayList<Message>, private val 
         var userPictureImage = itemView.findViewById<ImageView>(R.id.userPictureImage);
         var userLastMessage = itemView.findViewById<TextView>(R.id.userLastMessage);
         var progressBar = itemView.findViewById<ProgressBar>(R.id.progressUserBar)
+        var userCardView = itemView.findViewById<MaterialCardView>(R.id.userCardView)
     }
+
 
 
 }

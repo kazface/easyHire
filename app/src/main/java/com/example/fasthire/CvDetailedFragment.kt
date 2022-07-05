@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import com.google.firebase.storage.FirebaseStorage
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +24,7 @@ import androidx.appcompat.widget.AppCompatButton
 class CvDetailedFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var cv: Cv
-    private lateinit var cvPhoto: Bitmap
+    private var cvPhoto: Bitmap? = null
 
     private  var isOffer = false
     private  var user: User? = null
@@ -32,7 +33,7 @@ class CvDetailedFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             cv = it.getParcelable<Cv>("CV")!!
-            cvPhoto = it.getParcelable<Bitmap>("CVPhoto")!!
+            cvPhoto = it.getParcelable<Bitmap>("CVPhoto")
             isOffer = it.getBoolean("isOffer")
             user = it.getSerializable("User") as User
         }
@@ -64,7 +65,6 @@ class CvDetailedFragment : Fragment() {
 
 
 
-        cvPictureImage.setImageBitmap(cvPhoto)
         userFullName.text = cv.fullName
         cvTitle.text = cv.title
         vaccinationInfoLayout.visibility = if (cv.vaccination == 1) View.VISIBLE else View.INVISIBLE
@@ -89,6 +89,17 @@ class CvDetailedFragment : Fragment() {
 
         }
 
+        if(cvPhoto == null){
+            val storage = FirebaseStorage.getInstance()
+            var profilePhotoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/profilePhotos/${cv.email}")
+            GlideApp.with(view.context)
+                .load(profilePhotoRef)
+                .placeholder(R.drawable.ic_baseline_font_download_24)
+                .into(cvPictureImage)
+
+        }else{
+            cvPictureImage.setImageBitmap(cvPhoto)
+        }
     }
 
     companion object {

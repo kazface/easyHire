@@ -15,6 +15,7 @@
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/ic_baseline_font_download_24.xml" value="0.1225" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/job_card.xml" value="0.2065" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/message_bg.xml" value="0.2255" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/progress_bar.xml" value="0.124" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/radio_button_custom.xml" value="0.1435" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/drawable/radio_button_def.xml" value="0.1435" />
@@ -53,12 +54,15 @@
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_find_job_job.xml" value="0.4" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_home.xml" value="0.184375" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_job_detailed.xml" value="0.22" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_messenger.xml" value="0.33" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_notifications.xml" value="0.184375" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_saved_cvs.xml" value="0.18" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_saved_job.xml" value="0.1" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/fragment_select_chat.xml" value="0.25" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/job_card.xml" value="0.15" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/job_card_shimmer.xml" value="0.33" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/message_left_card.xml" value="0.22" />
+        <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/message_right_card.xml" value="0.33" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/searchview_bg.xml" value="0.1" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/select_job.xml" value="0.19038984587488667" />
         <entry key="..\:/Users/123/AndroidStudioProjects/fastHire/app/src/main/res/layout/user_card.xml" value="0.22" />
