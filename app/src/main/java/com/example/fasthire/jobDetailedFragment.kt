@@ -34,12 +34,15 @@ class jobDetailedFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var job: Job? = null
     private var isEdit: Boolean? = false
+    private var user: User? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             job = it.getParcelable("Job")
             isEdit = it.getBoolean("isEdit")
+            user = it.getSerializable("User") as User?
         }
 
 
@@ -134,6 +137,14 @@ class jobDetailedFragment : Fragment() {
         }
 
         applyButton.setOnClickListener{
+            val selectApplicantCvsFragment = SelectApplicantCvsFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            val bundle = Bundle()
+            bundle.putSerializable("User", user)
+            bundle.putParcelable("Job", job)
+            selectApplicantCvsFragment.arguments = bundle
+            transaction?.replace(R.id.fragmentContainer, selectApplicantCvsFragment)?.addToBackStack(null)
+            transaction?.commit()
 
 
         }

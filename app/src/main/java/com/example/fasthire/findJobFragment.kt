@@ -26,16 +26,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [findJobJobFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class findJobFragment : Fragment() {
 
     private lateinit var jobRecyclerView: RecyclerView;
@@ -46,9 +37,13 @@ class findJobFragment : Fragment() {
 
 
     private lateinit var database: DatabaseReference
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let {
+            user = it.getSerializable("User") as User
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -134,6 +129,7 @@ class findJobFragment : Fragment() {
             val jobDetailedFragment = jobDetailedFragment()
             val bundle = Bundle()
             bundle.putParcelable("Job", it)
+            bundle.putSerializable("Job", user)
             jobDetailedFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)

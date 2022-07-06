@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ApplicantCvsFragment"
+   android:background="@drawable/background3"
+    >
+
+    <TextView
+
+        android:id="@+id/textTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_weight="0"
+        android:fontFamily="@font/dmsansbold"
+        android:text="Select CV"
+        android:textColor="#1A73E9"
+        android:textSize="25sp" />
+    <LinearLayout
+        android:layout_below="@id/textTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/cvShimmerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <include layout="@layout/cv_card_shimmer"/>
+            <include layout="@layout/cv_card_shimmer"/>
+            <include layout="@layout/cv_card_shimmer"/>
+            </LinearLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@id/textTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cvRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/cv_card" />
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

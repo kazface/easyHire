@@ -90,13 +90,9 @@ class SignInActivity : AppCompatActivity() {
 
                     }
                     progressBar.visibility = View.GONE
-
                 }
-
-
             }
         }
-
         signUpButton.setOnClickListener {
             startActivity( Intent(this, SignUpActivity::class.java))
             finish()

@@ -1,5 +1,6 @@
 package com.example.fasthire
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,20 +22,28 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class SelectJob : Fragment() {
-    private lateinit var jobRecyclerView: RecyclerView;
-    private lateinit var jobList: ArrayList<Job>
-    private lateinit var jobAdapter: JobAdapter
+/**
+ * A simple [Fragment] subclass.
+ * Use the [SelectApplicantCvsFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class SelectApplicantCvsFragment : Fragment() {
+    private lateinit var cvRecyclerView: RecyclerView;
+    private lateinit var cvList: ArrayList<Cv>
+    private lateinit var cvAdapter: CvAdapter
     private lateinit var database: DatabaseReference
     private lateinit var user: User
-    private lateinit var cv: Cv
+
+    private  var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             user = it.getSerializable("User") as User
-            cv = it.getParcelable<Cv>("Cv")!!
+            job = it.getParcelable<Job>("Job")
         }
     }
 
@@ -42,91 +51,93 @@ class SelectJob : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        jobRecyclerView = view.findViewById(R.id.jobRecyclerView)
-        var shimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobShimmerLayout)
+        cvRecyclerView = view.findViewById(R.id.cvRecyclerView)
+        var shimmer = view.findViewById<ShimmerFrameLayout>(R.id.cvShimmerLayout)
         shimmer.startShimmerAnimation()
         shimmer.visibility = View.VISIBLE
 
-        jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
-        jobRecyclerView.setHasFixedSize(true)
-        jobRecyclerView.visibility = View.INVISIBLE
+        cvRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
+        cvRecyclerView.setHasFixedSize(true)
+        cvRecyclerView.visibility = View.INVISIBLE
 
-        jobList = arrayListOf();
+        cvList = arrayListOf();
 
-        jobAdapter = JobAdapter(jobList, false)
+        cvAdapter = CvAdapter(view.context, cvList, false)
 
-        jobRecyclerView.adapter = jobAdapter
+        cvRecyclerView.adapter = cvAdapter
 
-        database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Jobs")
-        database.addValueEventListener(object : ValueEventListener{
+        database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Cvs")
+        var userCvsRef = FirebaseAuth.getInstance().uid?.let { database.child(it) }
+        userCvsRef!!.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     for(cvSnapshot in snapshot.children){
-                        var job: Job = cvSnapshot.getValue<Job>()!!
-                        job.id = cvSnapshot.key
-                        Log.d("snapshot", job.toString())
-                        Log.d("id", user.id.toString())
-
-                        if(job.userId.toString() == FirebaseAuth.getInstance().uid.toString())
-                            jobList.add(job)
+                        var cv: Cv = cvSnapshot.getValue<Cv>()!!
+                        cvList.add(cv)
                     }
-                    jobRecyclerView.visibility = View.VISIBLE
+                    cvRecyclerView.visibility = View.VISIBLE
                     shimmer.stopShimmerAnimation()
                     shimmer.visibility = View.GONE
-                    jobAdapter.notifyDataSetChanged()
+                    cvAdapter.notifyDataSetChanged()
                 }
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
-        jobAdapter.notifyDataSetChanged()
-        jobAdapter.onItemClick = {
+        cvAdapter.notifyDataSetChanged()
 
 
-            var textMsg = "Hello! My name is ${user.fullName}, I am from ${it.companyName}. We are interesting in your resume '${cv.title}' "
+        cvAdapter.onItemClick = { cv: Cv, bitmap: Bitmap ->
+            var textMsg = "Hello! My name is ${user.fullName}, I am ${cv.title}. I am interesting in '${job?.title}' position "
             var sendUser: User?
 
             Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("Users")
-                .orderByChild("email")
-                .equalTo(cv.email.toString())
+                .child(job?.userId.toString())
                 .addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         Log.d("Snapshot", snapshot.toString())
-                        for(child in snapshot.children){
-
-                            sendUser = child.getValue<User>()
-                            sendUser?.id = child.key
-                            var message = Message(cv.id, FirebaseAuth.getInstance().uid, user.fullName, it.id, textMsg, sendUser?.id, sendUser?.fullName, textMsg, TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toInt(), user.email, sendUser?.email  )
+                            sendUser = snapshot.getValue<User>()
+                            sendUser?.id = snapshot.key
+                            var message = Message(cv.id, FirebaseAuth.getInstance().uid, user.fullName, job?.id, textMsg, sendUser?.id, sendUser?.fullName, textMsg, TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toInt(), user.email, sendUser?.email  )
                             var messagesRef = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("messages")
                             messagesRef.push().setValue(message)
                             Toast.makeText(view.context, "Message sent successfully! Please check message section", Toast.LENGTH_SHORT).show()
-                        }
                     }
                     override fun onCancelled(error: DatabaseError) {
                         Toast.makeText(view.context, "Please try again!", Toast.LENGTH_SHORT).show()
                     }
                 })
         }
+
+
+
+
+
     }
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.select_job, container, false)
+        return inflater.inflate(R.layout.fragment_select_applicant_cvs, container, false)
     }
 
     companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment ApplicantCvsFragment.
+         */
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-            SelectJob().apply {
+            SelectApplicantCvsFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

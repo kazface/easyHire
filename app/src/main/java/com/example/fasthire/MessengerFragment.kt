@@ -1,7 +1,6 @@
 package com.example.fasthire
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,11 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import java.util.concurrent.TimeUnit
 
 
 class MessengerFragment : Fragment() {
@@ -157,11 +154,24 @@ class MessengerFragment : Fragment() {
             cvDetailedFragment.arguments = bundle
             transaction?.replace(R.id.fragmentContainer, cvDetailedFragment)?.addToBackStack(null)
             transaction?.commit()
-
         }
 
 
+
+        sendButton.setOnClickListener{
+            if(textInput.text!!.isNotEmpty()){
+                val sentMessage = Message(null, uid, user.fullName, null, textInput.text.toString(), messager.fromId, messager.fromName, textInput.text.toString(), TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toInt(), user.email,messager.fromEmail)
+                messagesRef.push().setValue(sentMessage)
+                textInput.text = null
+            }
+        }
     }
+
+
+
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

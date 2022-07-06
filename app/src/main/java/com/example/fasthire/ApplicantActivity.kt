@@ -41,7 +41,10 @@ class ApplicantActivity : AppCompatActivity() {
                         replaceFragment(applicantHomePageFragment);
                     }
                     1 ->{
-                        replaceFragment(savedJobFragment.newInstance());
+
+                        var savedJobFragment = savedJobFragment.newInstance()
+                        savedJobFragment.arguments = bundle
+                        replaceFragment(savedJobFragment);
                     }
                     2 -> {
                         var selectChatFragment = SelectChatFragment.newInstance()

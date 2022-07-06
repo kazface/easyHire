@@ -3,8 +3,9 @@ package com.example.fasthire
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Message(val cv: String? = null, var fromId: String? = null, var fromName: String? = null, val job: String? = null, val text: String? = null, val toId: String? = null, val toName:String? = null, val message:String? = null, val unixTime: Int? = null,
-                   var fromEmail: String? = null, val toEmail: String? = null) : Parcelable {
+data class Message(
+    val cv: String? = null, var fromId: String? = null, var fromName: String? = null, val job: String? = null, val text: String? = null, val toId: String? = null, val toName:String? = null, val message:String? = null, val unixTime: Int? = null,
+    var fromEmail: String? = null, val toEmail: String? = null) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),

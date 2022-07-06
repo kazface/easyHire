@@ -33,10 +33,12 @@ class savedJobFragment : Fragment() {
     private lateinit var jobList: ArrayList<Job>
     private lateinit var jobAdapter: JobAdapter
     private lateinit var database: DatabaseReference
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.getSerializable("User") as User?
         }
     }
 
@@ -133,6 +135,7 @@ class savedJobFragment : Fragment() {
             val jobDetailedFragment = jobDetailedFragment()
             val bundle = Bundle()
             bundle.putParcelable("Job", it)
+            bundle.putSerializable("User", user)
             jobDetailedFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)
