@@ -66,7 +66,6 @@ class ApplicantProfileFragment : Fragment() {
         var exitButton = view.findViewById<AppCompatButton>(R.id.exitButton)
 
         var myCvButton = view.findViewById<AppCompatButton>(R.id.myCvButton)
-        var jobResponsesButton = view.findViewById<AppCompatButton>(R.id.jobResponsesButton)
 
 
 

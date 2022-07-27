@@ -29,13 +29,14 @@ class SignInActivity : AppCompatActivity() {
 
         val currentUser = firebaseAuth.currentUser
         if(currentUser != null){
-//            reload();
+            reload();
+            return;
         }
+
         setContentView(R.layout.activity_sign_in)
 
         var signUpButton = findViewById<Button>(R.id.signUpButton)
         var signInButton = findViewById<Button>(R.id.signInButton)
-
         var emailInput = findViewById<EditText>(R.id.emailInput)
         var passwordInput = findViewById<EditText>(R.id.passwordInput)
         var progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -45,7 +46,6 @@ class SignInActivity : AppCompatActivity() {
             if(emailInput.text.isEmpty()){
                 return false
             }
-
             if(passwordInput.text.isEmpty()){
                 return false
             }
@@ -101,7 +101,30 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun reload() {
-        TODO("Not yet implemented")
+        var database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users")
+        val userid = firebaseAuth.currentUser!!.uid
+
+
+
+        var intent = Intent(this, ApplicantActivity::class.java)
+        Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
+        database.child(userid).addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var user = snapshot.getValue<User>()
+
+                startActivity(intent.putExtra(
+                    "User",
+                    user
+                ))
+                finish()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+
+        })
     }
 
 

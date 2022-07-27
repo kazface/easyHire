@@ -21,7 +21,6 @@ class ApplicantActivity : AppCompatActivity() {
 
         var bottomNavigation = findViewById<MeowBottomNavigation>(R.id.bottomNav)
 
-
         bottomNavigation.show(0);
         bottomNavigation.add(MeowBottomNavigation.Model(0, R.drawable.ic_round_home_24))
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_round_bookmark_24))
