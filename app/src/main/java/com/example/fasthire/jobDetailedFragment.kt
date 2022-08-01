@@ -63,14 +63,14 @@ class jobDetailedFragment : Fragment() {
         var editJob = view.findViewById<AppCompatButton>(R.id.editJob)
 
 
-
+        Log.d("User", user.toString())
         fun Int.toBoolean() = this == 1
         var companyLogoImage = view.findViewById<ImageView>(R.id.companyLogoImage);
 
         //companyLogos/${job?.companyName}.png
 
         val storage = FirebaseStorage.getInstance()
-        val companyLogoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/companyLogos/${job?.companyName}.png")
+        val companyLogoRef = storage.getReferenceFromUrl("gs://fasthire-ae6c0.appspot.com/companyLogos/${job?.companyName}")
 
 
         GlideApp.with(view.context)
@@ -79,7 +79,7 @@ class jobDetailedFragment : Fragment() {
             .into(companyLogoImage)
 
 
-
+        Log.d("Job", job.toString())
         vaccinationInfoLayout.visibility = if(job?.vaccination!!.toBoolean()) View.VISIBLE else View.INVISIBLE
         skillsNeededText.text = job?.skills?.joinToString(separator = "\n")
         jobLocation.text = job?.location
@@ -137,6 +137,7 @@ class jobDetailedFragment : Fragment() {
         }
 
         applyButton.setOnClickListener{
+
             val selectApplicantCvsFragment = SelectApplicantCvsFragment()
             val transaction = fragmentManager?.beginTransaction()
             val bundle = Bundle()
@@ -145,7 +146,6 @@ class jobDetailedFragment : Fragment() {
             selectApplicantCvsFragment.arguments = bundle
             transaction?.replace(R.id.fragmentContainer, selectApplicantCvsFragment)?.addToBackStack(null)
             transaction?.commit()
-
 
         }
 

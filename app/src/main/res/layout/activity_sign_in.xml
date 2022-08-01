@@ -7,15 +7,14 @@
     android:background="@drawable/background"
     tools:context=".SignInActivity"
     >
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:indeterminate="true"
-        android:indeterminateDrawable="@drawable/progress_bar"
-         />
+        android:indeterminateDrawable="@drawable/progress_bar" />
 
     <ImageView
         android:id="@+id/easyHireLogo"
@@ -74,23 +73,12 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_primary_button"
         android:gravity="center"
-        android:text="Sign in"
         android:shadowColor="#A8A8A8"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        />
+        android:text="Sign in" />
 
-    <TextView
-        android:id="@+id/forgotPasswordButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/signInButton"
-        android:textColor="#6C92F4"
-        android:layout_marginTop="15dp"
-        android:text="Forgot password"
-        android:gravity="center"
-        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signUpButton"

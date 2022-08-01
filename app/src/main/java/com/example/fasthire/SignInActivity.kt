@@ -62,7 +62,6 @@ class SignInActivity : AppCompatActivity() {
                         val userid = firebaseAuth.currentUser!!.uid
 
 
-
                         var intent = Intent(this, ApplicantActivity::class.java)
                         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show()
                         database.child(userid).addValueEventListener(object : ValueEventListener{

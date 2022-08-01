@@ -55,15 +55,13 @@ class ApplicantCvsFragment : Fragment() {
         cvRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL ,false)
         cvRecyclerView.setHasFixedSize(true)
         cvRecyclerView.visibility = View.INVISIBLE
-
         cvList = arrayListOf();
-
         cvAdapter = CvAdapter(view.context, cvList, false)
-
         cvRecyclerView.adapter = cvAdapter
-
         database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Cvs")
+
         var userCvsRef = FirebaseAuth.getInstance().uid?.let { database.child(it) }
+
         userCvsRef!!.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
@@ -78,11 +76,10 @@ class ApplicantCvsFragment : Fragment() {
                 }
             }
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
-        cvAdapter.notifyDataSetChanged()
 
+        cvAdapter.notifyDataSetChanged()
 
         cvAdapter.onItemClick = { cv: Cv, bitmap: Bitmap ->
             val cvDetailedFragment = CvDetailedFragment()
@@ -105,10 +102,6 @@ class ApplicantCvsFragment : Fragment() {
             transaction?.replace(R.id.fragmentContainer, createApplicantCvPage)?.addToBackStack(null)
             transaction?.commit()
         }
-
-
-
-
     }
 
     override fun onCreateView(
@@ -120,15 +113,6 @@ class ApplicantCvsFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ApplicantCvsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             ApplicantCvsFragment().apply {

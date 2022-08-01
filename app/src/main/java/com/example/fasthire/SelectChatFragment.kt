@@ -64,28 +64,19 @@ class SelectChatFragment : Fragment() {
                         Log.d("fromId", message.fromId.toString())
                         Log.d("fromId", FirebaseAuth.getInstance().uid.toString())
 
-                        if(message.fromId.toString() == FirebaseAuth.getInstance().uid.toString()){
+                        if(message.fromId.toString() == FirebaseAuth.getInstance().uid.toString() || message.toId.toString() == FirebaseAuth.getInstance().uid.toString()){
                             messageAdd.fromId = message.toId
                             messageAdd.fromEmail = message.toEmail
                             messageAdd.fromName = message.toName
                             Log.d("messageAdd",messageAdd.fromId.toString())
+                            tempArray.add(messageAdd)
                         }
-                        tempArray.add(messageAdd)
                     }
                     Log.d("CheckArray", tempArray.toString())
 
                     var filtred = tempArray.groupBy { it.fromId }.map {
                         it.value.maxByOrNull { it.unixTime!! }
                     }
-
-//                    filtred.forEach{
-//                        Log.d("itFromId", it!!.fromId.toString())
-//                        Log.d("itFromId", FirebaseAuth.getInstance().uid.toString())
-//
-//                        if(it!!.fromId.toString() != FirebaseAuth.getInstance().uid.toString()){
-//                            chatList.add(it)
-//                        }
-//                    }
                     chatList.addAll(filtred.filterNotNull())
                     chatAdapter.notifyDataSetChanged()
                 }

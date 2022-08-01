@@ -30,7 +30,6 @@ data class Job(
     }
 
     override fun writeToParcel(p0: Parcel?, p1: Int) {
-        TODO("Not yet implemented")
     }
 
     companion object CREATOR : Parcelable.Creator<Job> {

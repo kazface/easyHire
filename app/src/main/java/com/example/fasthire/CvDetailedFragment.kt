@@ -35,7 +35,7 @@ class CvDetailedFragment : Fragment() {
             cv = it.getParcelable<Cv>("CV")!!
             cvPhoto = it.getParcelable<Bitmap>("CVPhoto")
             isOffer = it.getBoolean("isOffer")
-            user = it.getSerializable("User") as User
+            user = it.getSerializable("User") as User?
         }
     }
 

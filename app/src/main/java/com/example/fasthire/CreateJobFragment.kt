@@ -155,27 +155,17 @@ class CreateJobFragment : Fragment() {
 
         placeJobButton.setOnClickListener{
 
-
-
             if(isFormValid()){
-
-
                 var skills: ArrayList<Any> = arrayListOf()
                 for(child in skillsLayout.children){
                     var textView = child as TextInputEditText
                     skills.add(textView.text.toString())
                 }
-
                 var job: Job = Job(checkButton(), jobTitleText.text.toString(),selectedCompany?.name.toString(), selectedCompany?.location, jobPeriodDuration.text.toString() +" "+selectedDurationPeriod,
                 jobSalaryText.text.toString().toLong(), FirebaseAuth.getInstance().uid, TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) , jobDescrrText.text.toString(), if(jobVaccination.isChecked) 1 else 0, skills, null, null)                                                                                                    //Unix time
                 database.getReference("Jobs").push().setValue(job)
 
             }
-
-
-
-
-
         }
     }
 

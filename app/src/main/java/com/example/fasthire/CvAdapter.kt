@@ -31,22 +31,16 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>, val isS
         savedJobList = ArrayList(cvList)
     }
 
-
-
-
-
     var onItemClick : ((cv: Cv, bitmap: Bitmap) -> Unit)? = null
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.cv_card, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
         val cv: Cv = cvList[position]
-
-
         holder.cvCardView.setOnClickListener{
             onItemClick?.invoke(cv, holder.cvPictureImage.drawable.toBitmap())
         }
@@ -126,8 +120,9 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>, val isS
     override fun getItemCount(): Int {
         return cvList.size
     }
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
+
+    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         var cvCardView = itemView.findViewById<MaterialCardView>(R.id.cvCardView);
         var cvTitle = itemView.findViewById<TextView>(R.id.cvTitle);
@@ -137,7 +132,6 @@ class CvAdapter(val context: Context, private val cvList: ArrayList<Cv>, val isS
         var progressBar = itemView.findViewById<ProgressBar>(R.id.progressCvBar);
         var cvPictureImage = itemView.findViewById<ImageView>(R.id.cvPictureImage);
         var saveCheckBox = itemView.findViewById<CheckBox>(R.id.saveCheckBox);
-
 
 
     }

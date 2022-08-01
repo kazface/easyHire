@@ -38,11 +38,13 @@ class findJobFragment : Fragment() {
 
     private lateinit var database: DatabaseReference
     private var user: User? = null
+    private var jobType: String? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             user = it.getSerializable("User") as User
+            jobType = it.getString("JobType");
         }
     }
 
@@ -50,16 +52,9 @@ class findJobFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        //toDo (filters)
-        var partTimeCheckBox = view.findViewById<CheckBox>(R.id.partTimeTypeCheckBox)
-        var freelanceCheckBox = view.findViewById<CheckBox>(R.id.freelanceTypeCheckBox)
-        var fullTimeCheckBox = view.findViewById<CheckBox>(R.id.fullTimeTypeCheckBox)
-        partTimeCheckBox.isChecked = true
-        fullTimeCheckBox.isChecked = true
-        freelanceCheckBox.isChecked = true
 
 
-
+        Log.d("User", user.toString())
         var jobCardShimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobCardShimmer)
         jobCardShimmer.startShimmerAnimation();
         jobCardShimmer.visibility = View.VISIBLE;
@@ -98,8 +93,15 @@ class findJobFragment : Fragment() {
                                 }
                                 job!!.saved = saved
                                 if(!jobList.contains(job)){
-                                    jobList.add(job)
-                                    jobListSaved.add(job)
+                                    if(jobType != null){
+                                        if(job.type == jobType){
+                                            jobList.add(job)
+                                            jobListSaved.add(job)
+                                        }
+                                    }else{
+                                        jobList.add(job)
+                                        jobListSaved.add(job)
+                                    }
                                     jobAdapter.notifyDataSetChanged()
                                     jobRecyclerView.visibility = View.VISIBLE
                                     jobCardShimmer.visibility = View.GONE
@@ -128,13 +130,15 @@ class findJobFragment : Fragment() {
         jobAdapter.onItemClick = {
             val jobDetailedFragment = jobDetailedFragment()
             val bundle = Bundle()
+            Log.d("JobFromFindJob", it.toString())
             bundle.putParcelable("Job", it)
-            bundle.putSerializable("Job", user)
+            bundle.putSerializable("User", user)
             jobDetailedFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)
             transaction?.commit()
         }
+
 
         var searchView = view.findViewById<SearchView>(R.id.jobSearchView)
 
@@ -169,10 +173,7 @@ class findJobFragment : Fragment() {
         })
 
 
-        partTimeCheckBox.setOnCheckedChangeListener{ buttonView, isChecked ->
-            //toDo (Checkbox filters)
-                }
-    }
+     }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -188,14 +189,6 @@ class findJobFragment : Fragment() {
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment findJobJobFragment.
-         */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =

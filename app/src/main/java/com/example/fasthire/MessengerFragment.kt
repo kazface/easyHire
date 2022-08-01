@@ -135,6 +135,7 @@ class MessengerFragment : Fragment() {
             val jobDetailedFragment = jobDetailedFragment()
             val bundle = Bundle()
             bundle.putParcelable("Job", job)
+            bundle.putSerializable("User", user)
             jobDetailedFragment.arguments = bundle
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.fragmentContainer, jobDetailedFragment)?.addToBackStack(null)

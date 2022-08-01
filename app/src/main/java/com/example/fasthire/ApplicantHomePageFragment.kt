@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -50,9 +51,13 @@ class ApplicantHomePageFragment : Fragment() {
         var jobCardShimmer = view.findViewById<ShimmerFrameLayout>(R.id.jobCardShimmer)
         jobCardShimmer.startShimmerAnimation();
         jobCardShimmer.visibility = View.VISIBLE;
-        Log.d("InsideHomePage", user.fullName)
         var userFullNameText = view.findViewById<TextView>(R.id.userFullNameText)
+
         userFullNameText.text = user.fullName
+
+        var fullTimeShow = view.findViewById<MaterialCardView>(R.id.fullTimeShow)
+        var partTimeShow = view.findViewById<MaterialCardView>(R.id.partTimeShow)
+
 
         jobRecyclerView = view.findViewById(R.id.recentJobCardRecycle)
         jobRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL ,false)
@@ -62,6 +67,7 @@ class ApplicantHomePageFragment : Fragment() {
         jobList = arrayListOf();
         jobAdapter = JobAdapter(jobList)
         jobRecyclerView.adapter = jobAdapter
+
 
         database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Jobs")
         var isSavedRef = FirebaseAuth.getInstance().uid?.let {
@@ -117,9 +123,30 @@ class ApplicantHomePageFragment : Fragment() {
             val transaction = fragmentManager?.beginTransaction()
             var findJobFragment = findJobFragment()
             var bundle = Bundle()
-
             bundle.putSerializable("User", user)
+            findJobFragment.arguments = bundle;
+            transaction?.replace(R.id.fragmentContainer, findJobFragment)?.addToBackStack(null)
+            transaction?.commit()
+        }
 
+        fullTimeShow.setOnClickListener{
+            val transaction = fragmentManager?.beginTransaction()
+            var findJobFragment = findJobFragment()
+            var bundle = Bundle()
+            bundle.putSerializable("User", user)
+            bundle.putString("JobType","Full Time")
+            findJobFragment.arguments = bundle;
+            transaction?.replace(R.id.fragmentContainer, findJobFragment)?.addToBackStack(null)
+            transaction?.commit()
+        }
+
+        partTimeShow.setOnClickListener{
+            val transaction = fragmentManager?.beginTransaction()
+            var findJobFragment = findJobFragment()
+            var bundle = Bundle()
+            bundle.putSerializable("User", user)
+            bundle.putString("JobType","Part Time")
+            findJobFragment.arguments = bundle;
             transaction?.replace(R.id.fragmentContainer, findJobFragment)?.addToBackStack(null)
             transaction?.commit()
         }

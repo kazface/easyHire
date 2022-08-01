@@ -2,6 +2,7 @@ package com.example.fasthire
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.*
@@ -21,7 +22,6 @@ class SignUpActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
 
         super.onCreate(savedInstanceState)
@@ -102,7 +102,6 @@ class SignUpActivity : AppCompatActivity() {
 
                 progressBar.visibility = View.VISIBLE
 
-
                 firebaseAuth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString()).addOnCompleteListener{
                     if(it.isSuccessful){
 
@@ -124,8 +123,8 @@ class SignUpActivity : AppCompatActivity() {
                                 };
 
 
-
                     }else{
+                        Log.d("error", it.exception?.localizedMessage.toString())
                         Toast.makeText(this, it.exception?.localizedMessage.toString(), Toast.LENGTH_SHORT).show()
 
                     }

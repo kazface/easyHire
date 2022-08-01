@@ -1,6 +1,7 @@
 package com.example.fasthire
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
@@ -16,6 +17,9 @@ class ApplicantActivity : AppCompatActivity() {
 
         val user: User = intent.getSerializableExtra("User") as User
 
+
+        Log.d("User", user.toString())
+
         setContentView(R.layout.activity_applicant)
 
 
@@ -26,13 +30,11 @@ class ApplicantActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_round_bookmark_24))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_baseline_chat_bubble_24))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_baseline_person_24))
-
         if(!user.employer!!){
             var applicantHomePageFragment = ApplicantHomePageFragment.newInstance()
             val bundle = Bundle()
             bundle.putSerializable("User", user)
             applicantHomePageFragment.arguments = bundle
-
             addFragment(applicantHomePageFragment);
             bottomNavigation.setOnClickMenuListener {
                 when(it.id){

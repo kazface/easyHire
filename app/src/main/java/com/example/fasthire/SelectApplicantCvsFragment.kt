@@ -63,7 +63,7 @@ class SelectApplicantCvsFragment : Fragment() {
         cvList = arrayListOf();
 
         cvAdapter = CvAdapter(view.context, cvList, false)
-
+        Log.d("Job", job.toString())
         cvRecyclerView.adapter = cvAdapter
 
         database = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Cvs")
@@ -73,6 +73,9 @@ class SelectApplicantCvsFragment : Fragment() {
                 if(snapshot.exists()){
                     for(cvSnapshot in snapshot.children){
                         var cv: Cv = cvSnapshot.getValue<Cv>()!!
+                        cv.id = cvSnapshot.key
+                        Log.d("CVCheck",cv.toString())
+
                         cvList.add(cv)
                     }
                     cvRecyclerView.visibility = View.VISIBLE
@@ -94,11 +97,12 @@ class SelectApplicantCvsFragment : Fragment() {
 
             Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("Users")
-                .child(job?.userId.toString())
+                .child(job!!.userId.toString())
                 .addValueEventListener(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         Log.d("Snapshot", snapshot.toString())
                             sendUser = snapshot.getValue<User>()
+                            Log.d("CV",cv.toString())
                             sendUser?.id = snapshot.key
                             var message = Message(cv.id, FirebaseAuth.getInstance().uid, user.fullName, job?.id, textMsg, sendUser?.id, sendUser?.fullName, textMsg, TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toInt(), user.email, sendUser?.email  )
                             var messagesRef = Firebase.database("https://fasthire-ae6c0-default-rtdb.europe-west1.firebasedatabase.app/").getReference("messages")
